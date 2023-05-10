@@ -1,0 +1,217 @@
+#include "Include.h"
+
+
+
+ModernOpenGLRenderer::~ModernOpenGLRenderer()
+{
+	for (RectRenderBatch* b : rectBatches)
+	{
+		delete b;
+	}
+	delete shader;
+}
+
+void ModernOpenGLRenderer::setWindow(Window* w)
+{
+	this->window = w;
+}
+
+void ModernOpenGLRenderer::background(int grey)
+{
+	background(grey, grey, grey, 255);
+}
+
+void ModernOpenGLRenderer::background(int grey, int a)
+{
+	background(grey, grey, grey, a);
+}
+
+void ModernOpenGLRenderer::background(int r, int g, int b)
+{
+	background(r, g, b, 255);
+}
+
+void ModernOpenGLRenderer::background(int r, int g, int b, int a)
+{
+	glClearColor((float)(r) / 255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void ModernOpenGLRenderer::fillCircle(float x, float y, float r1, float r2)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::fillCircle(float x, float y, float r)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::drawCircle(float x, float y, float r)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+
+
+void ModernOpenGLRenderer::setColor(int grey)
+{
+	setColor(grey, grey, grey, 255);
+}
+
+
+
+void ModernOpenGLRenderer::setColor(int grey, int a)
+{
+	setColor(grey, grey, grey, a);
+}
+
+
+
+void ModernOpenGLRenderer::setColor(int r, int g, int b)
+{
+	setColor(r, g, b, 255);
+}
+
+
+
+
+void ModernOpenGLRenderer::setColor(int r, int g, int b, int a)
+{
+	shader->SetUniform4f("u_Color", (float)(r) / 255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
+	
+}
+
+
+
+
+void ModernOpenGLRenderer::setLineWidth(float w)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::line(float x1, float y1, float x2, float y2)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+
+
+void ModernOpenGLRenderer::fillRect(float x, float y, float w, float h)
+{
+	bool added = false;
+	for (RectRenderBatch* b : rectBatches)
+	{
+		if (b->hasRoom())
+		{
+			b->add(x,y,w,h);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		RectRenderBatch* batch = new RectRenderBatch(maxBatchSize, this, shader);
+		batch->add(x, y, w, h);
+		rectBatches.push_back(batch);
+	}
+
+	
+}
+
+void ModernOpenGLRenderer::fillRect(float x, float y, float s)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::drawRect(float x, float y, float w, float h)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+void ModernOpenGLRenderer::drawRect(float x, float y, float s)
+{
+	throw std::logic_error("The method or operation is not implemented.");
+}
+
+
+
+
+
+void ModernOpenGLRenderer::render()
+{
+	for (RectRenderBatch* b : rectBatches)
+	{
+		b->render();
+	}
+	
+
+}
+
+
+
+
+
+void ModernOpenGLRenderer::prepareFrame()
+{
+	//glClear(GL_COLOR_BUFFER_BIT);
+}
+
+
+
+
+
+void ModernOpenGLRenderer::refreshFramebuffer(int width, int height)
+{
+	glViewport(0, 0, width, height);
+}
+
+
+
+
+
+void ModernOpenGLRenderer::init()
+{
+	glEnable(GL_DEBUG_OUTPUT);
+	glDebugMessageCallback(errorCallback, nullptr);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	shader = new Shader("res/shaders/Basic.shader");
+}
+
+
+
+
+void ModernOpenGLRenderer::toNDC(float* in, float* out)
+{
+	out[0] = in[0] / getWindowWidth() * 2 - 1;
+	out[1] = in[1] / getWindowHeight() * -2 + 1;
+
+}
+
+
+
+
+void ModernOpenGLRenderer::errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
+{
+
+	std::cout << "OpenGL Debug Message:" << std::endl;
+	std::cout << "Source: " << source << std::endl;
+	std::cout << "Type: " << type << std::endl;
+	std::cout << "ID: " << id << std::endl;
+	std::cout << "Severity: " << severity << std::endl;
+	std::cout << "Message: " << message << std::endl;
+	
+
+
+
+}
+
+
+
+

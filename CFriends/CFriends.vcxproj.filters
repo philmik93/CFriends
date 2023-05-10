@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\Framework">
+      <UniqueIdentifier>{5d72101f-b9d6-4f15-862a-f007d29e89d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework">
+      <UniqueIdentifier>{6b40a2d7-1190-4ecf-8934-3fbb13f6f601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\LinearAlgebra">
+      <UniqueIdentifier>{845915de-74e3-44d7-8be2-da66fda4ddb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\LinearAlgebra">
+      <UniqueIdentifier>{2599eb3c-b854-4444-9d6b-8cdeee8ce219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples">
+      <UniqueIdentifier>{b5694fa7-2f27-441f-b98f-626fcc585748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples">
+      <UniqueIdentifier>{3758fe5a-1bdc-4942-92a1-be05755d2c5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\ParticleSystem">
+      <UniqueIdentifier>{73f78e7f-8b2f-4347-adae-16de61d779f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\ParticleSystem">
+      <UniqueIdentifier>{715ee600-9b59-4873-b92f-7985a704f7a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\ModernOpenGLRenderer">
+      <UniqueIdentifier>{228dd07a-206a-479b-9877-deb4f5d9ea64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\ModernOpenGLRenderer">
+      <UniqueIdentifier>{58e531c8-3e4b-4aa1-9ef3-af6b66872644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\Testing">
+      <UniqueIdentifier>{e53d699f-9bdd-4603-aea6-b3e22bb9e05b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\Testing">
+      <UniqueIdentifier>{2c1f8aa9-fadf-4222-b278-4708e2599f50}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWKeyListener.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWMouseListener.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="GLFWWindow.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CFriends.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLRenderer.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="CVector.h">
+      <Filter>Headerdateien\LinearAlgebra</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleSystem.h">
+      <Filter>Headerdateien\Examples\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Headerdateien\Examples\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Headerdateien\Examples\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernOpenGLRenderer.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="RectRenderBatch.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Headerdateien\Examples\Testing</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBufferLayout.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="App.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWKeyListener.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWMouseListener.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="GLFWWindow.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CFriends.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLRenderer.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="CVector.cpp">
+      <Filter>Quelldateien\LinearAlgebra</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleSystem.cpp">
+      <Filter>Quelldateien\Examples\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Quelldateien\Examples\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Quelldateien\Examples\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernOpenGLRenderer.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RectRenderBatch.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>Quelldateien\Examples\Testing</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\Basic.shader" />
+  </ItemGroup>
+</Project>
