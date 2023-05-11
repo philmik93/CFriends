@@ -21,6 +21,7 @@
 #include "VertexBuffer.h"
 #include "VertexBufferLayout.h"
 #include "VertexArray.h"
+#include "RenderBatch.h"
 #include "RectRenderBatch.h"
 #include "CircleRenderBatch.h"
 #include "ModernOpenGLRenderer.h"

@@ -14,10 +14,7 @@ int main()
 */
 
 
-int main()
-{
-	run(new ParticleSystem());
-}
+
 
 
 

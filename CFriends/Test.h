@@ -23,8 +23,8 @@ public:
 	{
 		background(30);
 		setColor(200, 0, 0);
-		for (int i = 0; i < 1000000; i++)
-			fillRect(getMouseX(), getMouseY(), 30, 30);
+		for (int i = 0; i < 1000; i++)
+			fillCircle(getMouseX(), getMouseY()+i, 30, 30);
 	}
 
 };
@@ -35,13 +35,18 @@ public:
 
 
 
-
+int main()
+{
+	run(new Test());
+}
 
 
  
- //int main()
- //{
- //	run(new Test());
- //}
+ /*
+ int main()
+ {
+ 	run(new Test());
+ }
+ */
  
 

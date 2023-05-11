@@ -2,6 +2,7 @@
 
 
 
+
 ModernOpenGLRenderer::~ModernOpenGLRenderer()
 {
 	for (RectRenderBatch* b : rectBatches)
@@ -11,25 +12,43 @@ ModernOpenGLRenderer::~ModernOpenGLRenderer()
 	delete shader;
 }
 
+
+
+
+
+
 void ModernOpenGLRenderer::setWindow(Window* w)
 {
 	this->window = w;
 }
+
+
+
+
 
 void ModernOpenGLRenderer::background(int grey)
 {
 	background(grey, grey, grey, 255);
 }
 
+
+
+
 void ModernOpenGLRenderer::background(int grey, int a)
 {
 	background(grey, grey, grey, a);
 }
 
+
+
+
 void ModernOpenGLRenderer::background(int r, int g, int b)
 {
 	background(r, g, b, 255);
 }
+
+
+
 
 void ModernOpenGLRenderer::background(int r, int g, int b, int a)
 {
@@ -37,15 +56,43 @@ void ModernOpenGLRenderer::background(int r, int g, int b, int a)
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+
+
+
+
+
 void ModernOpenGLRenderer::fillCircle(float x, float y, float r1, float r2)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	
+	bool added = false;
+	for (CircleRenderBatch* b : circleBatches)
+	{
+		if (b->hasRoom())
+		{
+			b->add(x, y, r1, r2);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		CircleRenderBatch* batch = new CircleRenderBatch(maxBatchSize, this, shader);
+		batch->add(x, y, r1, r2);
+		circleBatches.push_back(batch);
+	}
 }
+
+
+
+
 
 void ModernOpenGLRenderer::fillCircle(float x, float y, float r)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	fillCircle(x, y, r, r);
 }
+
+
+
 
 void ModernOpenGLRenderer::drawCircle(float x, float y, float r)
 {

@@ -10,6 +10,7 @@ class ModernOpenGLRenderer : public Renderer
 public:
 	int maxBatchSize = 1000000;
 	std::vector<RectRenderBatch*> rectBatches;
+	std::vector<CircleRenderBatch*> circleBatches;
 	Shader* shader;
 
 public:

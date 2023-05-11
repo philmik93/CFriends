@@ -1,36 +1,16 @@
 #include "Include.h"
 
 
-void RectRenderBatch::render()
+
+
+
+RectRenderBatch::RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader) : RenderBatch(maxBatchSize, renderer, shader)
 {
-	vb->Bind();
-	vb->rebuffer(vertices, rectCount * 4 * 2 * sizeof(float));
-	shader->Bind();
-	
-
-
-	va->Bind();
-	ib->Bind();
-
-	
-
-	glDrawElements(GL_TRIANGLES, rectCount * 6, GL_UNSIGNED_INT, nullptr);   // where the nullptr is normaly the pointer of the indices array but we already loaded it in so we pass just the nullptr
-
 	rectCount = 0;
-
-	
-}
-
-
-
-
-
-RectRenderBatch::RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader) : maxBatchSize(maxBatchSize), renderer(renderer), shader(shader)
-{
 	vertices = new float[maxBatchSize * 4 * 2];
 	indices = new unsigned int[maxBatchSize * 6];
 
-	generateIndicecs(indices);
+	generateIndices(indices);
 
 
 	va = new VertexArray();
@@ -61,9 +41,29 @@ RectRenderBatch::RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* rendere
 
 
 
-
-void RectRenderBatch::generateIndicecs(unsigned int* buffer)
+void RectRenderBatch::render()
 {
+	vb->Bind();
+	vb->rebuffer(vertices, rectCount * 4 * 2 * sizeof(float));
+	shader->Bind();
+
+
+
+	va->Bind();
+	ib->Bind();
+
+
+
+	glDrawElements(GL_TRIANGLES, rectCount * 6, GL_UNSIGNED_INT, nullptr);   // where the nullptr is normaly the pointer of the indices array but we already loaded it in so we pass just the nullptr
+
+	rectCount = 0;
+
+
+}
+
+void RectRenderBatch::generateIndices(unsigned int* buffer)
+{
+
 	for (int i = 0; i < maxBatchSize; i++)
 	{
 		buffer[6 * i + 0] = 4 * i + 0;
@@ -73,7 +73,13 @@ void RectRenderBatch::generateIndicecs(unsigned int* buffer)
 		buffer[6 * i + 4] = 4 * i + 3;
 		buffer[6 * i + 5] = 4 * i + 2;
 	}
+
 }
+
+
+
+
+
 
 void RectRenderBatch::add(float x, float y, float w, float h)
 {
@@ -105,11 +111,8 @@ void RectRenderBatch::add(float x, float y, float w, float h)
 
 
 
-void RectRenderBatch::toNDC(float* in, float* out)
-{
-	out[0] = in[0] / renderer->getWindowWidth() * 2 - 1;
-	out[1] = in[1] / renderer->getWindowHeight() * -2 + 1;
-}
+
+
 
 bool RectRenderBatch::hasRoom()
 {

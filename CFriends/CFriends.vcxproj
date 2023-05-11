@@ -33,6 +33,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="RectRenderBatch.h" />
+    <ClInclude Include="RenderBatch.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="System.h" />
@@ -56,6 +57,7 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="RectRenderBatch.cpp" />
+    <ClCompile Include="RenderBatch.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="System.cpp" />

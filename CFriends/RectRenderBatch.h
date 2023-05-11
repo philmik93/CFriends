@@ -3,29 +3,17 @@
 
 class ModernOpenGLRenderer;
 
-class RectRenderBatch
+class RectRenderBatch : public RenderBatch
 {
 public:
-	int maxBatchSize;
-	float* vertices;
-	unsigned int* indices;
-
-
-	VertexArray* va;
-	VertexBuffer* vb;
-	VertexBufferLayout* layout;
-	IndexBuffer* ib;
-	Shader* shader;
 	int rectCount = 0;
-	ModernOpenGLRenderer* renderer;
 	
 
 public:
-	void render();
 	RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader);
-	void generateIndicecs(unsigned int* buffer);
+	void render() override;
+	void generateIndices(unsigned int* buffer) override;
 	void add(float x, float y, float w, float h);
-	bool hasRoom();
-	void toNDC(float* in, float* out);
+	bool hasRoom() override;
 };
 
