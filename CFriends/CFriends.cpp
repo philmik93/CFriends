@@ -8,7 +8,7 @@ static Window* mainWindow = nullptr;
 
 void run(App* a)
 {
-	mainWindow = new GLFWWindow(600, 400, "CFriends App", new ModernOpenGLRenderer(), a);
+	mainWindow = new GLFWWindow(600, 400, "CFriends App", new OpenGLRenderer(), a);
 	mainWindow->run();
 }
 

@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="CircleRenderBatch.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="GLFWMouseListener.h" />
     <ClInclude Include="GLFWWindow.h" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="CircleRenderBatch.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="GLFWMouseListener.cpp" />
     <ClCompile Include="GLFWWindow.cpp" />
