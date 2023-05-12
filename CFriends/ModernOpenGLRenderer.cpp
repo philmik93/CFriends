@@ -130,6 +130,7 @@ void ModernOpenGLRenderer::setColor(int r, int g, int b)
 
 void ModernOpenGLRenderer::setColor(int r, int g, int b, int a)
 {
+	
 	shader->SetUniform4f("u_Color", (float)(r) / 255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
 	
 }
@@ -142,9 +143,26 @@ void ModernOpenGLRenderer::setLineWidth(float w)
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
+
+
 void ModernOpenGLRenderer::line(float x1, float y1, float x2, float y2)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	bool added = false;
+	for (LineRenderBatch* b : lineBatches)
+	{
+		if (b->hasRoom())
+		{
+			b->add(x1, y1, x2, y2);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		LineRenderBatch* batch = new LineRenderBatch(maxBatchSize, this, shader);
+		batch->add(x1, y1, x2, y2);
+		lineBatches.push_back(batch);
+	}
 }
 
 
@@ -193,6 +211,11 @@ void ModernOpenGLRenderer::drawRect(float x, float y, float s)
 void ModernOpenGLRenderer::render()
 {
 	for (RectRenderBatch* b : rectBatches)
+	{
+		b->render();
+	}
+
+	for (CircleRenderBatch* b : circleBatches)
 	{
 		b->render();
 	}

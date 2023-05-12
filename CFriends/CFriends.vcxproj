@@ -28,6 +28,7 @@
     <ClInclude Include="GLFWKeyListener.h" />
     <ClInclude Include="CFriends.h" />
     <ClInclude Include="IndexBuffer.h" />
+    <ClInclude Include="LineRenderBatch.h" />
     <ClInclude Include="ModernOpenGLRenderer.h" />
     <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="Particle.h" />
@@ -52,6 +53,7 @@
     <ClCompile Include="GLFWKeyListener.cpp" />
     <ClCompile Include="CFriends.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
+    <ClCompile Include="LineRenderBatch.cpp" />
     <ClCompile Include="ModernOpenGLRenderer.cpp" />
     <ClCompile Include="OpenGLRenderer.cpp" />
     <ClCompile Include="Particle.cpp" />

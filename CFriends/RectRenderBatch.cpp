@@ -21,12 +21,6 @@ RectRenderBatch::RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* rendere
 	ib = new IndexBuffer(indices, maxBatchSize * 6);
 
 	shader->Bind();
-	
-
-	for (int i = 0; i < 10; i++)
-	{
-		std::cout << vertices[i] << std::endl;
-	}
 
 
 	va->Unbind();
@@ -43,6 +37,16 @@ RectRenderBatch::RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* rendere
 
 void RectRenderBatch::render()
 {
+
+
+	std::cout << "---------------------------------------\n";
+	for (int i = 0; i < rectCount*8; i++)
+	{
+		std::cout << vertices[i] << std::endl;
+	}
+	std::cout << "---------------------------------------\n";
+
+
 	vb->Bind();
 	vb->rebuffer(vertices, rectCount * 4 * 2 * sizeof(float));
 	shader->Bind();

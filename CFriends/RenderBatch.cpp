@@ -14,6 +14,7 @@ RenderBatch::RenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shade
 RenderBatch::~RenderBatch()
 {
 	delete[] vertices;
+	delete[] indices;
 	delete va;
 	delete vb;
 	delete layout;

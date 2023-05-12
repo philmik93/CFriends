@@ -24,6 +24,7 @@
 #include "RenderBatch.h"
 #include "RectRenderBatch.h"
 #include "CircleRenderBatch.h"
+#include "LineRenderBatch.h"
 #include "ModernOpenGLRenderer.h"
 #include "Window.h"
 #include "GLFWWindow.h"
