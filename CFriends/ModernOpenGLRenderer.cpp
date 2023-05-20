@@ -96,12 +96,27 @@ void ModernOpenGLRenderer::fillCircle(float x, float y, float r)
 
 void ModernOpenGLRenderer::drawCircle(float x, float y, float r)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	drawCircle(x, y, r, r);
 }
 
 void ModernOpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	bool added = false;
+	for (DrawCircleRenderBatch* b : drawCircleBatches)
+	{
+		if (b->hasRoom())
+		{
+			b->add(x, y, r1, r2);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		DrawCircleRenderBatch* batch = new DrawCircleRenderBatch(maxBatchSize, this, shader);
+		batch->add(x, y, r1, r2);
+		drawCircleBatches.push_back(batch);
+	}
 }
 
 
@@ -140,7 +155,7 @@ void ModernOpenGLRenderer::setColor(int r, int g, int b, int a)
 
 void ModernOpenGLRenderer::setLineWidth(float w)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	glLineWidth(w);
 }
 
 
@@ -191,7 +206,7 @@ void ModernOpenGLRenderer::fillRect(float x, float y, float w, float h)
 
 void ModernOpenGLRenderer::fillRect(float x, float y, float s)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	fillRect(x, y, s, s);
 }
 
 void ModernOpenGLRenderer::drawRect(float x, float y, float w, float h)
@@ -216,6 +231,18 @@ void ModernOpenGLRenderer::render()
 	}
 
 	for (CircleRenderBatch* b : circleBatches)
+	{
+		b->render();
+	}
+
+
+	for (DrawCircleRenderBatch* b : drawCircleBatches)
+	{
+		b->render();
+	}
+
+
+	for (LineRenderBatch* b : lineBatches)
 	{
 		b->render();
 	}

@@ -70,12 +70,15 @@ void RectRenderBatch::generateIndices(unsigned int* buffer)
 
 	for (int i = 0; i < maxBatchSize; i++)
 	{
+
 		buffer[6 * i + 0] = 4 * i + 0;
 		buffer[6 * i + 1] = 4 * i + 1;
 		buffer[6 * i + 2] = 4 * i + 2;
 		buffer[6 * i + 3] = 4 * i + 1;
 		buffer[6 * i + 4] = 4 * i + 3;
 		buffer[6 * i + 5] = 4 * i + 2;
+
+		
 	}
 
 }

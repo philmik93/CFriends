@@ -1,7 +1,6 @@
 #pragma once
 #include "Include.h"
 template<typename T>
-
 class CVector
 {
 
@@ -28,6 +27,8 @@ public:
 	}
 
 
+
+
 	
 
 	inline CVector<T>(const CVector<T>& other) 
@@ -41,7 +42,7 @@ public:
 	}
 
 
-/*
+
 
 	inline CVector<T>& operator=(const CVector<T>& other)
 	{
@@ -58,7 +59,12 @@ public:
 		return *this;
 	}
 	
-*/
+
+
+
+
+
+
 
 
 
@@ -115,8 +121,7 @@ public:
 		if (mag != 0) return this->mult(1 / mag);
 		else
 		{
-			std::cerr << "normalizing failed, magnitude is zero\n";
-			return nullptr;
+			return this;
 		}
 	}
 

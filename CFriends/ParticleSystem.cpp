@@ -14,9 +14,10 @@ int main()
 */
 
 
-
-
-
+int main()
+{
+	run(new ParticleSystem());
+}
 
 
 void ParticleSystem::setup()
@@ -48,5 +49,8 @@ void ParticleSystem::process(double dt)
 		delete syncedWind;
 		
 	}
+	
+
+	
 
 }

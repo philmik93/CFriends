@@ -12,9 +12,8 @@ public:
 
 	inline void setup() override
 	{
-		setSize(400, 400);
+		setSize(800, 800);
 		
-
 
 	}
 
@@ -23,8 +22,7 @@ public:
 	{
 		background(30);
 		setColor(200, 0, 0);
-		for (int i = 0; i < 1; i++)
-			fillCircle(getMouseX(), getMouseY(), 30,30);
+		drawCircle(100, 100, 30, 30);
 	}
 
 };
@@ -35,10 +33,7 @@ public:
 
 
 
-int main()
-{
-	run(new Test());
-}
+
 
 
  
@@ -48,5 +43,7 @@ int main()
  	run(new Test());
  }
  */
+
+
  
 

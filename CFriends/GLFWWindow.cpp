@@ -54,7 +54,7 @@ int GLFWWindow::init()
     glfwSwapInterval(1);
     
     if (glewInit() != GLEW_OK) std::cout << "warning: cant initialize glew\n";
-    std::cout << "OpenGL Version: " << glGetString(GL_VERSION);
+    std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 
     renderer->init();
 	

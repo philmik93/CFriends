@@ -49,6 +49,24 @@
     <Filter Include="Quelldateien\Examples\Testing">
       <UniqueIdentifier>{2c1f8aa9-fadf-4222-b278-4708e2599f50}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Examples\PhysicsEngine2D">
+      <UniqueIdentifier>{187faf83-d07e-4eaf-99e7-8cfb635167c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\PhysicsEngine2D">
+      <UniqueIdentifier>{b6d7cae0-5c03-436a-bdb0-a3df22b045b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\Minigame">
+      <UniqueIdentifier>{b2c08757-cd2f-4951-9c1e-b06725443adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\Minigame">
+      <UniqueIdentifier>{e6fced70-cd37-427d-90b4-06210a99d850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\Sudoku">
+      <UniqueIdentifier>{cb5a5469-b850-43c4-b3d1-6a8f0adda974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\Sudoku">
+      <UniqueIdentifier>{b924dc1d-f829-4da5-85ea-957dc0322dba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -123,6 +141,33 @@
     <ClInclude Include="LineRenderBatch.h">
       <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="PhysicsEngine2D.h">
+      <Filter>Headerdateien\Examples\PhysicsEngine2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Headerdateien\Examples\PhysicsEngine2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Headerdateien\Examples\PhysicsEngine2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Minigame.h">
+      <Filter>Headerdateien\Examples\Minigame</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Headerdateien\Examples\Minigame</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Headerdateien\Examples\Minigame</Filter>
+    </ClInclude>
+    <ClInclude Include="Sudoku.h">
+      <Filter>Headerdateien\Examples\Sudoku</Filter>
+    </ClInclude>
+    <ClInclude Include="Field.h">
+      <Filter>Headerdateien\Examples\Sudoku</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCircleRenderBatch.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -189,6 +234,33 @@
       <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
     </ClCompile>
     <ClCompile Include="LineRenderBatch.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsEngine2D.cpp">
+      <Filter>Quelldateien\Examples\PhysicsEngine2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Quelldateien\Examples\PhysicsEngine2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Quelldateien\Examples\PhysicsEngine2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigame.cpp">
+      <Filter>Quelldateien\Examples\Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Quelldateien\Examples\Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Quelldateien\Examples\Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Sudoku.cpp">
+      <Filter>Quelldateien\Examples\Sudoku</Filter>
+    </ClCompile>
+    <ClCompile Include="Field.cpp">
+      <Filter>Quelldateien\Examples\Sudoku</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawCircleRenderBatch.cpp">
       <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
     </ClCompile>
   </ItemGroup>

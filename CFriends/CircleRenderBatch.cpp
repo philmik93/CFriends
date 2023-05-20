@@ -4,22 +4,32 @@
 CircleRenderBatch::CircleRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader) : RenderBatch(maxBatchSize, renderer, shader)
 {
 	circleCount = 0;
-	resolution = 4;
+	resolution = 24;
 	indices = new unsigned int[maxBatchSize * resolution * 3];
-	vertices = new float[(2*maxBatchSize + maxBatchSize * resolution)*2];
+	vertices = new float[(maxBatchSize * resolution + maxBatchSize * 2) * 2];
+
+
+
 	va = new VertexArray();
-	vb = new VertexBuffer(nullptr, maxBatchSize + maxBatchSize * resolution);
+	va->Bind();
+	vb = new VertexBuffer(nullptr, (maxBatchSize * resolution + maxBatchSize * 2) * 2 * sizeof(float));
+	
+
 	layout = new VertexBufferLayout();
 	layout->Push<float>(2);
 	va->AddBuffer(*vb, *layout);
 	generateIndices(indices);
 	ib = new IndexBuffer(indices, maxBatchSize * resolution * 3);
 
+	
+
 	shader->Bind();
 	va->Unbind();
 	vb->Unbind();
 	ib->Unbind();
 	shader->Unbind();
+
+	
 
 }
 
@@ -29,16 +39,24 @@ CircleRenderBatch::CircleRenderBatch(int maxBatchSize, ModernOpenGLRenderer* ren
 void CircleRenderBatch::generateIndices(unsigned int* in)
 {
 
-	
-	for (int i = 0; i < maxBatchSize * resolution; i++)
+	for (int j = 0; j < maxBatchSize; j++)
 	{
-		in[i * 3 + 0] = 0;
-		in[i * 3 + 1] = i + 1;
-		in[i * 3 + 2] = i + 2;
+		int offset = j * 3 * resolution;
+		for (int i = 0; i < resolution; i++)
+		{
+			in[offset + i*3 + 0] = j * resolution + 2 * j + 0;
+			in[offset + i*3 + 1] = j * resolution + 2 * j + i + 1;
+			in[offset + i*3 + 2] = j * resolution + 2 * j + i + 2;
 
-		//std::cout << in[i * 3 + 0] << "|" << in[i * 3 + 1] << "|" << in[i * 3 + 2] << std::endl;
-	}				 
 			
+		}
+	}
+
+// 	for (int i = 0; i < maxBatchSize * resolution; i++)
+// 	{
+// 		std::cout << in[i*3 + 0] << "|" << in[i*3 + 1] << "|" << in[i*3 + 2] << "\n";
+// 	}
+	
 	
 }
 
@@ -66,6 +84,18 @@ void CircleRenderBatch::add(float x, float y, float r1, float r2)
 		vertices[(2*circleCount + circleCount * resolution)*2 + 3 + i * 2] = out[1];
 	}
 
+	
+// 		vertices[0] = 0.0f;
+// 		vertices[1] = 0.0f;
+// 	
+// 		vertices[2] = 1.0f;
+// 		vertices[3] = 1.0f;
+// 	
+// 		vertices[4] = -0.9f;
+// 		vertices[5] = 1.0f;
+	
+// 		vertices[6] = -0.9f;
+// 		vertices[7] = -1.0f;
 
 	circleCount++;
 	
@@ -89,13 +119,13 @@ bool CircleRenderBatch::hasRoom()
 void CircleRenderBatch::render()
 {
 	
-	std::cout << "---------------------------------------\n";
-	for (int i = 0; i < (2*maxBatchSize + maxBatchSize * resolution) * 2; i++)
-	{
-		std::cout << vertices[i] << std::endl;
-		if (i % 2 != 0) std::cout << std::endl;
-	}
-	std::cout << "---------------------------------------\n";
+// 	std::cout << "---------------------------------------\n";
+// 	for (int i = 0; i < (2*maxBatchSize + maxBatchSize * resolution) * 2; i++)
+// 	{
+// 		std::cout << vertices[i] << std::endl;
+// 		if (i % 2 != 0) std::cout << std::endl;
+// 	}
+// 	std::cout << "---------------------------------------\n";
 
 
 
@@ -103,11 +133,15 @@ void CircleRenderBatch::render()
 
 	
 	vb->Bind();
-	vb->rebuffer(vertices, (2*circleCount + circleCount * resolution)*2);
+	vb->rebuffer(vertices, (circleCount * resolution + circleCount * 2) * 2 * sizeof(float));
+	
+
+
 	shader->Bind();
 
 	va->Bind();
 	ib->Bind();
+	
 
 	glDrawElements(GL_TRIANGLES, circleCount * resolution * 3, GL_UNSIGNED_INT, nullptr);
 	circleCount = 0;

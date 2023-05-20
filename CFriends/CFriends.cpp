@@ -115,12 +115,22 @@ void drawRect(float x, float y, float s)
 
 float getWidth()
 {
-	return mainWindow->width;
+	if (mainWindow != nullptr) return mainWindow->width;
+	else
+	{
+		std::cout << "\nCFRIENDS WAS NOT INITIALIZED. getWidth CANT BE USED\n";
+		return NULL;
+	}
 }
 
 float getHeight()
 {
-	return mainWindow->height;
+	if (mainWindow != nullptr) return mainWindow->height;
+	else
+	{
+	std::cout << "\nCFRIENDS WAS NOT INITIALIZED. getWidth CANT BE USED\n";
+	return NULL;
+	}
 }
 
 bool isKeyPressed(int keycode)
