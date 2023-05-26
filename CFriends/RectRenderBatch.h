@@ -7,7 +7,7 @@ class RectRenderBatch : public RenderBatch
 {
 public:
 	int rectCount = 0;
-	
+	const int VERTEX_FLOAT_COUNT = 6;
 
 public:
 	RectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader);

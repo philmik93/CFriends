@@ -146,7 +146,8 @@ void ModernOpenGLRenderer::setColor(int r, int g, int b)
 void ModernOpenGLRenderer::setColor(int r, int g, int b, int a)
 {
 	
-	shader->SetUniform4f("u_Color", (float)(r) / 255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
+	//shader->SetUniform4f("u_Color", (float)(r) / 255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
+	color = {r, g, b, a};
 	
 }
 
@@ -211,12 +212,27 @@ void ModernOpenGLRenderer::fillRect(float x, float y, float s)
 
 void ModernOpenGLRenderer::drawRect(float x, float y, float w, float h)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	bool added = false;
+	for (DrawRectRenderBatch* b : drawRectBatches)
+	{
+		if (b->hasRoom())
+		{
+			b->add(x, y, w, h);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		DrawRectRenderBatch* batch = new DrawRectRenderBatch(maxBatchSize, this, shader);
+		batch->add(x, y, w, h);
+		drawRectBatches.push_back(batch);
+	}
 }
 
 void ModernOpenGLRenderer::drawRect(float x, float y, float s)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+	drawRect(x, y, s, s);
 }
 
 
@@ -243,6 +259,11 @@ void ModernOpenGLRenderer::render()
 
 
 	for (LineRenderBatch* b : lineBatches)
+	{
+		b->render();
+	}
+
+	for (DrawRectRenderBatch* b : drawRectBatches)
 	{
 		b->render();
 	}

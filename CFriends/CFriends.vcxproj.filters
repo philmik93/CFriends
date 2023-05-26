@@ -168,6 +168,9 @@
     <ClInclude Include="DrawCircleRenderBatch.h">
       <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="DrawRectRenderBatch.h">
+      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -261,6 +264,9 @@
       <Filter>Quelldateien\Examples\Sudoku</Filter>
     </ClCompile>
     <ClCompile Include="DrawCircleRenderBatch.cpp">
+      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawRectRenderBatch.cpp">
       <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
     </ClCompile>
   </ItemGroup>

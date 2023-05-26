@@ -6,6 +6,7 @@ class CircleRenderBatch : public RenderBatch
 
 
 public:
+	const int vertexFloatCount = 6;
 	int circleCount;
 	int resolution;
 

@@ -7,13 +7,25 @@
 class ModernOpenGLRenderer : public Renderer
 {
 
+
+	struct color
+	{
+		int r;
+		int g;
+		int b;
+		int a;
+	};
+
+
 public:
 	int maxBatchSize = 10000;
 	std::vector<RectRenderBatch*> rectBatches;
 	std::vector<CircleRenderBatch*> circleBatches;
 	std::vector<LineRenderBatch*> lineBatches;
 	std::vector<DrawCircleRenderBatch*> drawCircleBatches;
+	std::vector<DrawRectRenderBatch*> drawRectBatches;
 	Shader* shader;
+	color color = {255,255,255,255};
 
 public:
 	~ModernOpenGLRenderer();

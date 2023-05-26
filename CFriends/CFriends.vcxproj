@@ -24,6 +24,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CVector.h" />
     <ClInclude Include="DrawCircleRenderBatch.h" />
+    <ClInclude Include="DrawRectRenderBatch.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="GLFWMouseListener.h" />
@@ -59,6 +60,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="DrawCircleRenderBatch.cpp" />
+    <ClCompile Include="DrawRectRenderBatch.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="GLFWMouseListener.cpp" />

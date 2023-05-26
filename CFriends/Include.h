@@ -23,6 +23,7 @@
 #include "VertexArray.h"
 #include "RenderBatch.h"
 #include "RectRenderBatch.h"
+#include "DrawRectRenderBatch.h"
 #include "CircleRenderBatch.h"
 #include "DrawCircleRenderBatch.h"
 #include "LineRenderBatch.h"

@@ -22,10 +22,10 @@ Particle::Particle(const Particle& other) : pos(other.pos), vel(other.vel), acc(
 void Particle::display()
 {
 	setColor(255, 255, 255,(int)liveTime);
-	fillCircle(pos.get(0), pos.get(1), size - 2);
+	fillRect(pos.get(0), pos.get(1), size - 2);
 	setLineWidth(2);
 	setColor(0, 0, 0, (int)liveTime);
-	drawCircle(pos.get(0), pos.get(1), size);
+	drawRect(pos.get(0), pos.get(1), size);
 	
 }
 
