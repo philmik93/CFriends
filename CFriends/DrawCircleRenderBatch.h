@@ -5,6 +5,11 @@ class DrawCircleRenderBatch : public RenderBatch
 public:
 	int circleCount;
 	int resolution;
+	int vertexFloatCount;
+	int vertexSize;
+	int circleVertexCount;
+	int circleIndexCount;
+
 public:
 	DrawCircleRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader);
 	void add(float x, float y, float r1, float r2);

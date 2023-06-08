@@ -7,19 +7,25 @@ DrawCircleRenderBatch::DrawCircleRenderBatch(int maxBatchSize, ModernOpenGLRende
 {
 	circleCount = 0;
 	resolution = 25;
-	indices = new unsigned int[maxBatchSize * resolution * 2];
-	vertices = new float[(maxBatchSize * resolution * 2) * 2];
+	vertexFloatCount = 6;
+	vertexSize = vertexFloatCount * sizeof(float);
+	circleVertexCount = resolution *2;
+	circleIndexCount = 2 * resolution;
+
+	indices = new unsigned int[maxBatchSize * circleIndexCount];
+	vertices = new float[maxBatchSize * vertexFloatCount * circleVertexCount];
 
 	va = new VertexArray();
 	va->Bind();
-	vb = new VertexBuffer(nullptr, (maxBatchSize * resolution * 2) * 2 * sizeof(float));
+	vb = new VertexBuffer(nullptr, maxBatchSize * circleVertexCount * vertexSize);
 
 
 	layout = new VertexBufferLayout();
 	layout->Push<float>(2);
+	layout->Push<float>(4);
 	va->AddBuffer(*vb, *layout);
 	generateIndices(indices);
-	ib = new IndexBuffer(indices, maxBatchSize * resolution * 2);
+	ib = new IndexBuffer(indices, maxBatchSize * circleIndexCount);
 
 
 
@@ -45,21 +51,30 @@ void DrawCircleRenderBatch::add(float x, float y, float r1, float r2)
 	float in[2];
 	float out[2];
 
+	int floatsPerLine = 2 * vertexFloatCount;
+
 	for (int i = 0; i < resolution; i++)
 	{
 		in[0] = sinf(2 * M_PI / resolution * i) * r1 + x;
 		in[1] = cosf(2 * M_PI / resolution * i) * r2 + y;
 		toNDC(in, out);
-		vertices[(circleCount * resolution*2) * 2 + i * 4] = out[0];
-		vertices[(circleCount * resolution*2) * 2 + i * 4 + 1] = out[1];
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine] = out[0];
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 1] = out[1];
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 2] = (float)(renderer->color.r)/255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 3] = (float)(renderer->color.g)/255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 4] = (float)(renderer->color.b)/255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 5] = (float)(renderer->color.a)/255.0;
 
 
 		in[0] = sinf(2 * M_PI / resolution * (i+1)) * r1 + x;
 		in[1] = cosf(2 * M_PI / resolution * (i+1)) * r2 + y;
 		toNDC(in, out);
-		vertices[(circleCount * resolution*2) * 2 + i * 4 + 2] = out[0];
-		vertices[(circleCount * resolution*2) * 2 + i * 4 + 3] = out[1];
-
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 6] = out[0];
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 7] = out[1];
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 8] = (float)(renderer->color.r) / 255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 9] = (float)(renderer->color.g) / 255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 10] = (float)(renderer->color.b) / 255.0;
+		vertices[circleCount * circleVertexCount * vertexFloatCount + i * floatsPerLine + 11] = (float)(renderer->color.a) / 255.0;
 
 	}
 
@@ -90,14 +105,14 @@ void DrawCircleRenderBatch::add(float x, float y, float r1, float r2)
 void DrawCircleRenderBatch::render()
 {
 	vb->Bind();
-	vb->rebuffer(vertices, (circleCount * resolution * 2) * 2 * sizeof(float));
+	vb->rebuffer(vertices, circleCount * circleVertexCount * vertexSize);
 
 	shader->Bind();
 
 	va->Bind();
 	ib->Bind();
 
-	glDrawElements(GL_LINES, circleCount * resolution * 2, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_LINES, circleCount * circleIndexCount, GL_UNSIGNED_INT, nullptr);
 	circleCount = 0;
 }
 
