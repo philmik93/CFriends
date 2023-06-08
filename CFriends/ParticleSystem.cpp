@@ -50,6 +50,8 @@ void ParticleSystem::process(double dt)
 		
 	}
 
+	line(0,0, 100,100);
+
 	
 
 	

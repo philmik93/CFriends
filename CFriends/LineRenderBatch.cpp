@@ -4,14 +4,21 @@
 LineRenderBatch::LineRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader) : RenderBatch(maxBatchSize, renderer, shader)
 {
 	lineCount = 0;
-	vertices = new float[maxBatchSize * 2 * 2];
-	indices = new unsigned int[maxBatchSize * 2];
+
+	lineVertexCount = 2;
+	vertexFloatCount = 6;
+	vertexSize = vertexFloatCount * sizeof(float);
+	lineIndexCount = 2;
+
+	vertices = new float[maxBatchSize * lineVertexCount * vertexFloatCount];
+	indices = new unsigned int[maxBatchSize * lineIndexCount];
 	generateIndices(indices);
 	va = new VertexArray();
-	vb = new VertexBuffer(nullptr, maxBatchSize * 2 * 2 * sizeof(float));
+	vb = new VertexBuffer(nullptr, maxBatchSize * lineVertexCount * vertexSize);
 	layout = new VertexBufferLayout();
 	layout->Push<float>(2);
-	ib = new IndexBuffer(indices, maxBatchSize * 2);
+	layout->Push<float>(4);
+	ib = new IndexBuffer(indices, maxBatchSize * lineIndexCount);
 	va->AddBuffer(*vb, *layout);
 
 }
@@ -22,14 +29,22 @@ void LineRenderBatch::add(float x1, float y1, float x2, float y2)
 	float out[2];
 	toNDC(in, out);
 	
-	vertices[lineCount * 4 + 0] = out[0];
-	vertices[lineCount * 4 + 1] = out[1];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 0] = out[0];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 1] = out[1];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 2] = (float)(renderer->color.r) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 3] = (float)(renderer->color.g) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 4] = (float)(renderer->color.b) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 5] = (float)(renderer->color.a) / 255.0;
 
 	in[0] = x2, in[1] = y2;
 	toNDC(in, out);
 	
-	vertices[lineCount * 4 + 2] = out[0];
-	vertices[lineCount * 4 + 3] = out[1];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 6] = out[0];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 7] = out[1];
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 8] = (float)(renderer->color.r) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 9] = (float)(renderer->color.g) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 10] = (float)(renderer->color.b) / 255.0;
+	vertices[lineCount * lineVertexCount * vertexFloatCount + 11] = (float)(renderer->color.a) / 255.0;
 
 	lineCount++;
 
@@ -42,11 +57,11 @@ void LineRenderBatch::render()
 
 	va->Bind();
 	vb->Bind();
-	vb->rebuffer(vertices, lineCount * 2 * 2 * sizeof(float));
+	vb->rebuffer(vertices, lineCount * lineVertexCount * vertexSize);
 	ib->Bind();
 	shader->Bind();
 
-	glDrawElements(GL_LINES, lineCount * 2, GL_UNSIGNED_INT, nullptr);
+	glDrawElements(GL_LINES, lineCount * lineIndexCount, GL_UNSIGNED_INT, nullptr);
 	
 	lineCount = 0;
 }

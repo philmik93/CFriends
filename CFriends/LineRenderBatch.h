@@ -6,7 +6,10 @@ class LineRenderBatch : public RenderBatch
 {
 public:
 	int lineCount;
-
+	int lineVertexCount;
+	int vertexFloatCount;
+	int vertexSize;
+	int lineIndexCount;
 
 
 public:
