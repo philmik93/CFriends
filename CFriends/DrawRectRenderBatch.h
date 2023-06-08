@@ -4,7 +4,8 @@ class DrawRectRenderBatch : public RenderBatch
 {
 public:
 	int rectCount;
-
+	const int VERTEX_FLOAT_COUNT = 6;
+	const int RECT_FLOAT_COUNT = VERTEX_FLOAT_COUNT * 4;
 
 public:
 	DrawRectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader);

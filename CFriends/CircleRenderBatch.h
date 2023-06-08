@@ -6,9 +6,12 @@ class CircleRenderBatch : public RenderBatch
 
 
 public:
-	const int vertexFloatCount = 6;
 	int circleCount;
 	int resolution;
+	int circleVertexCount;
+	int cirlceIndexCount;
+	int vertexFloatCount;
+	int vertexSize;
 
 public:
 	CircleRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader);

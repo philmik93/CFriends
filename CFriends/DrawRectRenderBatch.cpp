@@ -5,16 +5,17 @@
 DrawRectRenderBatch::DrawRectRenderBatch(int maxBatchSize, ModernOpenGLRenderer* renderer, Shader* shader) : RenderBatch(maxBatchSize, renderer, shader)
 {
 	rectCount = 0;
-	vertices = new float[maxBatchSize * 4 * 2];
+	vertices = new float[maxBatchSize * 4 * VERTEX_FLOAT_COUNT];
 	indices = new unsigned int[maxBatchSize * 8];
 
 	generateIndices(indices);
 
 
 	va = new VertexArray();
-	vb = new VertexBuffer(nullptr, maxBatchSize * 4 * 2 * sizeof(float));
+	vb = new VertexBuffer(nullptr, maxBatchSize * 4 * VERTEX_FLOAT_COUNT * sizeof(float));
 	layout = new VertexBufferLayout();
 	layout->Push<float>(2);
+	layout->Push<float>(4);
 	va->AddBuffer(*vb, *layout);
 	ib = new IndexBuffer(indices, maxBatchSize * 8);
 
@@ -40,6 +41,7 @@ DrawRectRenderBatch::DrawRectRenderBatch(int maxBatchSize, ModernOpenGLRenderer*
 
 void DrawRectRenderBatch::add(float x, float y, float w, float h)
 {
+	
 	float in[2] = { x, y };
 	float out1[2], out2[2], out3[2], out4[2];
 	toNDC(in, out1);
@@ -51,15 +53,31 @@ void DrawRectRenderBatch::add(float x, float y, float w, float h)
 	in[0] = x + w;
 	in[1] = y;
 	toNDC(in, out4);
-
-	vertices[rectCount * 8 + 0] = out1[0];
-	vertices[rectCount * 8 + 1] = out1[1];
-	vertices[rectCount * 8 + 2] = out2[0];
-	vertices[rectCount * 8 + 3] = out2[1];
-	vertices[rectCount * 8 + 4] = out3[0];
-	vertices[rectCount * 8 + 5] = out3[1];
-	vertices[rectCount * 8 + 6] = out4[0];
-	vertices[rectCount * 8 + 7] = out4[1];
+	
+	vertices[rectCount * RECT_FLOAT_COUNT + 0] = out1[0];
+	vertices[rectCount * RECT_FLOAT_COUNT + 1] = out1[1];
+	vertices[rectCount * RECT_FLOAT_COUNT + 2] = (float)renderer->color.r / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 3] = (float)renderer->color.g / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 4] = (float)renderer->color.b / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 5] = (float)renderer->color.a / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 6] = out2[0];
+	vertices[rectCount * RECT_FLOAT_COUNT + 7] = out2[1];
+	vertices[rectCount * RECT_FLOAT_COUNT + 8] = (float)renderer->color.r / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 9] = (float)renderer->color.g / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 10] = (float)renderer->color.b / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 11] = (float)renderer->color.a / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 12] = out3[0];
+	vertices[rectCount * RECT_FLOAT_COUNT + 13] = out3[1];
+	vertices[rectCount * RECT_FLOAT_COUNT + 14] = (float)renderer->color.r / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 15] = (float)renderer->color.g / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 16] = (float)renderer->color.b / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 17] = (float)renderer->color.a / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 18] = out4[0];
+	vertices[rectCount * RECT_FLOAT_COUNT + 19] = out4[1];
+	vertices[rectCount * RECT_FLOAT_COUNT + 20] = (float)renderer->color.r / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 21] = (float)renderer->color.g / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 22] = (float)renderer->color.b / 255;
+	vertices[rectCount * RECT_FLOAT_COUNT + 23] = (float)renderer->color.a / 255;
 
 	rectCount++;
 }
@@ -85,7 +103,7 @@ void DrawRectRenderBatch::render()
 
 
 	vb->Bind();
-	vb->rebuffer(vertices, rectCount * 4 * 2 * sizeof(float));
+	vb->rebuffer(vertices, rectCount * 4 * VERTEX_FLOAT_COUNT * sizeof(float));
 	shader->Bind();
 
 
