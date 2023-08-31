@@ -10,6 +10,7 @@
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
+#include "CMatrix.h"
 #include "CVector.h"
 #include "GLFWKeyListener.h"
 #include "GLFWMouseListener.h"

@@ -17,6 +17,8 @@ class ModernOpenGLRenderer : public Renderer
 	};
 
 
+	
+
 public:
 	int maxBatchSize = 10000;
 	std::vector<RectRenderBatch*> rectBatches;
@@ -26,6 +28,11 @@ public:
 	std::vector<DrawRectRenderBatch*> drawRectBatches;
 	Shader* shader;
 	color color = {255,255,255,255};
+
+
+private:
+	int currentZ;
+	 
 
 public:
 	~ModernOpenGLRenderer();

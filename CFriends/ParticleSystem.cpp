@@ -14,10 +14,7 @@ int main()
 */
 
 
-int main()
-{
-	run(new ParticleSystem());
-}
+
 
 
 void ParticleSystem::setup()
@@ -33,6 +30,9 @@ void ParticleSystem::setup()
 void ParticleSystem::process(double dt)
 {
 	background(100, 255);
+
+	setColor(0, 0, 0);
+
 	system->run(dt);
 
 	system->pos.set(getWidth() / 2, 0);
@@ -50,8 +50,7 @@ void ParticleSystem::process(double dt)
 		
 	}
 
-	line(0,0, 100,100);
-
+	setColor(0,0,0);
 	
 
 	

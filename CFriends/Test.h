@@ -37,12 +37,23 @@ public:
 
 
  
- /*
+ 
  int main()
  {
- 	run(new Test());
+	 CMatrix<int> m1(3, 3);
+	 CMatrix<int> m2(3, 3);
+	 m1.randomize(0, 9);
+	 m2.randomize(0, 9);
+
+	 m1.print();
+	 m2.print();
+
+	 CMatrix<int>::add(m1, m2).print();
+
+	 
+
  }
- */
+ 
 
 
  
