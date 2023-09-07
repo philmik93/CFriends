@@ -39,7 +39,9 @@ void Engine::update(double dt)
 bool Engine::checkCollision(Object& obj1, Object& obj2)
 {
 	float dist = obj1.size / 2 + obj2.size / 2;
-	if (CVector<float>::sub(&(obj1.pos), &(obj2.pos))->getMag() <= dist) return true;
+	CVector<float> temp;
+	CVector<float>::sub(&(obj1.pos), &(obj2.pos), &temp);
+	if (temp.getMag() <= dist) return true;
 		
 	return false;
 }

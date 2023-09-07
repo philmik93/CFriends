@@ -1,6 +1,5 @@
 #pragma once
-#include <random>
-#include <string>
+#include "Include.h"
 
 
 
@@ -16,6 +15,16 @@ private:
 
 
 public:
+
+	inline CMatrix<T>()
+	{
+		rows = 0;
+		columns = 0;
+		elements = nullptr;
+	}
+
+
+
 	inline CMatrix<T>(int rows, int columns) : rows(rows), columns(columns)
 	{
 		elements = new T* [rows];
@@ -60,7 +69,11 @@ public:
 
 
 
-
+	friend inline std::ostream& operator<<(std::ostream& os, const CMatrix<T>& obj)
+	{
+		os << obj.toString();
+		return os;
+	}
 
 
 	inline CMatrix<T> add(CMatrix<T>& m)
@@ -842,16 +855,7 @@ public:
 
 	inline void print() const
 	{
-		using namespace std;
-		for (int i = 0; i < rows; i++)
-		{
-			cout << endl;
-			for (int j = 0; j < columns; j++)
-			{
-				cout << elements[i][j] << "|" << "\t";
-			}
-		}
-		cout << endl;
+		std::cout << toString() << std::endl;
 	}
 
 

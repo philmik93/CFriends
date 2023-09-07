@@ -27,7 +27,9 @@ Player::Player(float x, float y, float size, float speed) : pos(CVector<float>({
 
 void Player::move()
 {
-	pos.add(CVector<float>::mult(moveDir.normalize(), speed));
+	CVector<float> moveVec;
+	CVector<float>::mult(moveDir.normalize(), speed, &moveVec);
+	pos.add(&moveVec);
 }
 
 

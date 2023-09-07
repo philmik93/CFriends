@@ -8,21 +8,23 @@ class Test : public App
 
 
 public:
-
+	
+	OpenGLTexture texturew;
 
 	inline void setup() override
 	{
 		setSize(800, 800);
-		
-
+		texturew = OpenGLTexture("res/textures/neurons.jpg");
 	}
 
 
 	inline void process(double dt) override
 	{
 		background(30);
-		setColor(200, 0, 0);
-		drawCircle(100, 100, 30, 30);
+		
+		//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		texture(texturew, 0, 0, texturew.getWidth(), texturew.getHeight());
 	}
 
 };
@@ -37,22 +39,9 @@ public:
 
 
  
+
  
- int main()
- {
-	 CMatrix<int> m1(3, 3);
-	 CMatrix<int> m2(3, 3);
-	 m1.randomize(0, 9);
-	 m2.randomize(0, 9);
-
-	 m1.print();
-	 m2.print();
-
-	 CMatrix<int>::add(m1, m2).print();
-
-	 
-
- }
+ 
  
 
 

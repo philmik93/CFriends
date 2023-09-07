@@ -4,5 +4,9 @@
 
 
 
+int main()
+{
+	run(new Test());
+}
 
 

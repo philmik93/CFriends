@@ -41,13 +41,12 @@ void ParticleSystem::process(double dt)
 	if (isMousePressed())
 	{	
 		CVector<float> mouse = CVector<float>({getMouseX(), getMouseY()});
-		wind = CVector<float>::sub(&(system->pos), &mouse);
+		CVector<float>::sub(&(system->pos), &mouse, wind);
 		wind->setMag(0.05);
 
-		CVector<float>* syncedWind = CVector<float>::mult(wind, dt);
-		system->addForce(*syncedWind);
-		delete syncedWind;
-		
+		CVector<float> syncedWind;
+		CVector<float>::mult(wind, dt, &syncedWind);
+		system->addForce(syncedWind);
 	}
 
 	setColor(0,0,0);

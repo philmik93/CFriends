@@ -1,7 +1,9 @@
+#pragma once
 #include "Include.h"
 #include "Player.h"
 #include "Controller.h"
-#pragma once
+
+
 
 class Minigame : public App
 {
@@ -25,12 +27,9 @@ public:
 		player->display();
 	}
 
+	
+
 };
-
-
-
-
-
 
 
 
@@ -40,4 +39,11 @@ int main()
 	run(new Minigame());
 }
 */
+
+
+
+
+
+
+
 

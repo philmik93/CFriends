@@ -31,7 +31,8 @@ public:
 	void fillRect(float x, float y, float s);
 	void drawRect(float x, float y, float w, float h);
 	void drawRect(float x, float y, float s);
-
+	void loadTexture(std::string path);
+	void texture(CTexture& texture, double x, double y, double w, double h);
 
 	void render();
 	void prepareFrame();

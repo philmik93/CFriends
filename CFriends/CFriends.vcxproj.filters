@@ -73,6 +73,21 @@
     <Filter Include="Quelldateien\Examples\Bloobs">
       <UniqueIdentifier>{1173df8a-dbbd-40b7-88f3-93ececcd3647}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Examples\LinearRegression">
+      <UniqueIdentifier>{28d81964-dac0-4a5b-8bbd-b35ea1437390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\LinearRegression">
+      <UniqueIdentifier>{38ba9d68-6971-4556-92fb-63fb2675b9f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Examples\Flocking">
+      <UniqueIdentifier>{cce21a51-a596-4924-93db-f17e058ddda8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Examples\Flocking">
+      <UniqueIdentifier>{f412dc05-1d2d-4f55-886b-ea7adfc815e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Vendor">
+      <UniqueIdentifier>{caacd28e-b397-48a9-951d-51eb97e0ebe7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -192,6 +207,27 @@
     <ClInclude Include="CMatrix.h">
       <Filter>Headerdateien\LinearAlgebra</Filter>
     </ClInclude>
+    <ClInclude Include="LinearRegression.h">
+      <Filter>Headerdateien\Examples\LinearRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="Perceptron.h">
+      <Filter>Headerdateien\Examples\LinearRegression</Filter>
+    </ClInclude>
+    <ClInclude Include="Flocking.h">
+      <Filter>Headerdateien\Examples\Flocking</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Headerdateien\Examples\Flocking</Filter>
+    </ClInclude>
+    <ClInclude Include="CTexture.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGLTexture.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Headerdateien\Vendor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -217,9 +253,6 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Quelldateien\Framework</Filter>
-    </ClCompile>
-    <ClCompile Include="CVector.cpp">
-      <Filter>Quelldateien\LinearAlgebra</Filter>
     </ClCompile>
     <ClCompile Include="ParticleSystem.cpp">
       <Filter>Quelldateien\Examples\ParticleSystem</Filter>
@@ -269,9 +302,6 @@
     <ClCompile Include="Engine.cpp">
       <Filter>Quelldateien\Examples\PhysicsEngine2D</Filter>
     </ClCompile>
-    <ClCompile Include="Minigame.cpp">
-      <Filter>Quelldateien\Examples\Minigame</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Quelldateien\Examples\Minigame</Filter>
     </ClCompile>
@@ -302,8 +332,31 @@
     <ClCompile Include="Food.cpp">
       <Filter>Quelldateien\Examples\Bloobs</Filter>
     </ClCompile>
+    <ClCompile Include="LinearRegression.cpp">
+      <Filter>Quelldateien\Examples\LinearRegression</Filter>
+    </ClCompile>
+    <ClCompile Include="Minigame.cpp">
+      <Filter>Quelldateien\Examples\Minigame</Filter>
+    </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Quelldateien\Examples\Flocking</Filter>
+    </ClCompile>
+    <ClCompile Include="CTexture.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGLTexture.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>Headerdateien\Vendor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\textures\neurons.jpg">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

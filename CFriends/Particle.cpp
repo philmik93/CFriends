@@ -33,13 +33,13 @@ void Particle::update(double dt)
 {
 
 	CVector<float> grav({ 0.0f, 0.05f });
-	CVector<float>* syncedGrav = CVector<float>::mult(&grav, dt);
-	addForce(*syncedGrav);
+	CVector<float>syncedGrav;
+	CVector<float>::mult(&grav, dt, &syncedGrav);
+	addForce(syncedGrav);
 	vel.add(&acc);
-	CVector<float>* syncedVel = CVector<float>::mult(&vel, dt);
-	pos.add(syncedVel);
-	delete syncedVel;
-	delete syncedGrav;
+	CVector<float> syncedVel;
+	CVector<float>::mult(&vel, dt, &syncedVel);
+	pos.add(&syncedVel);
 	acc.mult(0.0f);
 
 	liveTime -= 1.5f * dt;

@@ -45,10 +45,10 @@ void Bloob::update(double dt)
 
 void Bloob::move(CVector<float> *target)
 {
-	CVector<float>* moveVec = CVector<float>::sub(target, &pos);
-	moveVec->setMag(speed);
-	vel = *moveVec;
-	delete moveVec;
+	CVector<float> moveVec;
+	CVector<float>::sub(target, &pos, &moveVec);
+	moveVec.setMag(speed);
+	vel = moveVec;
 }
 
 
@@ -65,9 +65,9 @@ CVector<float> Bloob::calcNextTarget()
 
 bool Bloob::reachedTarget(CVector<float>* target)
 {
-	CVector<float>* vec = CVector<float>::sub(target, &pos);
-	float dist = vec->getMag();
-	delete vec;
+	CVector<float> vec;
+	CVector<float>::sub(target, &pos, &vec);
+	float dist = vec.getMag();
 	if (dist <= size) return true;
 	else return false;
 }

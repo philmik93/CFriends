@@ -113,6 +113,16 @@ void drawRect(float x, float y, float s)
 	mainWindow->renderer->drawRect(x, y, s);
 }
 
+void loadTexture(std::string path)
+{
+	mainWindow->renderer->loadTexture(path);
+}
+
+void texture(CTexture& texture, double x, double y, double w, double h)
+{
+	mainWindow->renderer->texture(texture, x, y, w, h);
+}
+
 float getWidth()
 {
 	if (mainWindow != nullptr) return mainWindow->width;
@@ -179,9 +189,9 @@ int randi(int min, int max)
 	return dis(gen);
 }
 
-float map(float value, float fromA, float fromB, float toA, float toB)
+float map(float value, float fromA, float fromB, float toA, float toB)         // maybe not working...
 {
-	return value / (fromB - fromA) * (toB-toA) + toA;
+	return ((fromB - fromA) - fromB + value) / (fromB - fromA) * (toB-toA) + toA;
 }
 
 

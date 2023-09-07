@@ -188,6 +188,49 @@ void OpenGLRenderer::drawRect(float x, float y, float s)
 	drawRect(x, y, s, s);
 }
 
+void OpenGLRenderer::loadTexture(std::string path)
+{
+
+}
+
+void OpenGLRenderer::texture(CTexture& texture, double x, double y, double w, double h)
+{
+	float in[2] = { x, y };
+	float out1[2], out2[2], out3[2], out4[2];
+	toNDC(in, out1);
+	in[1] = y + h;
+	toNDC(in, out2);
+	in[0] = x + w;
+	in[1] = y;
+	toNDC(in, out3);
+	in[0] = x + w;
+	in[1] = y + h;
+	toNDC(in, out4);
+
+
+	glActiveTexture(GL_TEXTURE0);
+	texture.bind(0);
+
+	glEnable(GL_TEXTURE_2D);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex2f(out1[0], out1[1]);
+
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex2f(out2[0], out2[1]);
+
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex2f(out3[0], out3[1]);
+
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex2f(out4[0], out4[1]);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+}
+
+
+
 void OpenGLRenderer::render()
 {
 }
@@ -208,6 +251,7 @@ void OpenGLRenderer::init()
 	glDebugMessageCallback(errorCallback, nullptr);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	
 }
 
 

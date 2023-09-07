@@ -107,9 +107,9 @@ void Population::update(double dt)
 
 		for (int i = 0; i < food.size(); i++)
 		{
-			CVector<float> *vec = CVector<float>::sub(&(b->pos), &(food.at(i)->pos));
-			float dist = vec->getMag();
-			delete vec;
+			CVector<float> vec;
+			CVector<float>::sub(&(b->pos), &(food.at(i)->pos), &vec);
+			float dist = vec.getMag();
 			if (dist < b->size)
 			{
 				b->eat(food.at(i)->nutrition);
