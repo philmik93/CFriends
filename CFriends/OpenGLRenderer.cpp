@@ -3,8 +3,6 @@
 OpenGLRenderer::OpenGLRenderer()
 {
 	this->resolution = 40;
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glColor4f(0,0,0,1);
 }
 
 void OpenGLRenderer::setWindow(Window* w)
@@ -40,6 +38,9 @@ void OpenGLRenderer::background(int r, int g, int b, int a)
 
 void OpenGLRenderer::fillCircle(float x, float y, float r1, float r2)
 {
+	shader->Bind();
+
+
 	float in[2] = { x, y };
 	float out[2];
 	toNDC(in, out);
@@ -90,6 +91,36 @@ void OpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
 
 	glEnd();
 
+}
+
+void OpenGLRenderer::drawTri(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	float in[2] = {x1, y1}, out[2];
+	glBegin(GL_LINE_LOOP);
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	in[0] = x2; in[1] = y2;
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	in[0] = x3; in[1] = y3;
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	glEnd();
+}
+
+void OpenGLRenderer::fillTri(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	float in[2] = { x1, y1 }, out[2];
+	glBegin(GL_TRIANGLES);
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	in[0] = x2; in[1] = y2;
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	in[0] = x3; in[1] = y3;
+	toNDC(in, out);
+	glVertex2f(out[0], out[1]);
+	glEnd();
 }
 
 void OpenGLRenderer::setColor(int grey)
@@ -195,6 +226,9 @@ void OpenGLRenderer::loadTexture(std::string path)
 
 void OpenGLRenderer::texture(CTexture& texture, double x, double y, double w, double h)
 {
+	
+	shader->Bind();
+	texture.bind(0);
 	float in[2] = { x, y };
 	float out1[2], out2[2], out3[2], out4[2];
 	toNDC(in, out1);
@@ -206,27 +240,32 @@ void OpenGLRenderer::texture(CTexture& texture, double x, double y, double w, do
 	in[0] = x + w;
 	in[1] = y + h;
 	toNDC(in, out4);
+	
+	shader->setUniform1i("u_texture", 0);
+	
+	unsigned int vbID, vaID;
+	float vertices[] = {
+		out1[0], out1[1], 0.0f, 0.0f,
+		out2[0], out2[1], 0.0f, 1.0f,
+		out3[0], out3[1], 1.0f, 0.0f,
+		out3[0], out3[1], 1.0f, 0.0f,
+		out2[0], out2[1], 0.0f, 1.0f,
+		out4[0], out4[1], 1.0f, 1.0f
+		
+		
+	};
+	glGenVertexArrays(1, &vaID);
+	glBindVertexArray(vaID);
 
+	glGenBuffers(1, &vbID);
+	glBindBuffer(GL_ARRAY_BUFFER, vbID);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	glActiveTexture(GL_TEXTURE0);
-	texture.bind(0);
-
-	glEnable(GL_TEXTURE_2D);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex2f(out1[0], out1[1]);
-
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex2f(out2[0], out2[1]);
-
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex2f(out3[0], out3[1]);
-
-
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(out4[0], out4[1]);
-	glEnd();
-	glDisable(GL_TEXTURE_2D);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
+	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 
@@ -251,6 +290,11 @@ void OpenGLRenderer::init()
 	glDebugMessageCallback(errorCallback, nullptr);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	std::cout << "init\n";
+	shader = new Shader("res/shaders/Basic.shader");
+	shader->Bind();
+	glColor4f(0.8f, 0.7f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	
 }
 

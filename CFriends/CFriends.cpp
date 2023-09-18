@@ -6,9 +6,20 @@ static Window* mainWindow = nullptr;
 
 
 
+
 void run(App* a)
 {
-	mainWindow = new GLFWWindow(600, 400, "CFriends App", new OpenGLRenderer(), a);
+	switch(currentGraphics)
+	{
+	case LEGACY_OPENGL:
+		mainWindow = new GLFWWindow(600, 400, "CFriends App", new OpenGLRenderer(), a);
+		break;
+	case MODERN_OPENGL:
+		break;
+	case VULCAN:
+		break;
+	}
+	
 	mainWindow->run();
 }
 
@@ -61,6 +72,16 @@ void drawCircle(float x, float y, float r)
 void drawCircle(float x, float y, float r1, float r2)
 {
 	mainWindow->renderer->drawCircle(x, y, r1, r2);
+}
+
+void drawTri(float x1 ,float y1, float x2, float y2, float x3, float y3)
+{
+	mainWindow->renderer->drawTri(x1, y1, x2, y2, x3, y3);
+}
+
+void fillTri(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	mainWindow->renderer->fillTri(x1, y1, x2, y2, x3, y3);
 }
 
 void setColor(int grey)

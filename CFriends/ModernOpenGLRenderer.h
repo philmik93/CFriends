@@ -46,6 +46,8 @@ public:
 	void fillCircle(float x, float y, float r) override;
 	void drawCircle(float x, float y, float r) override;
 	void drawCircle(float x, float y, float r1, float r2) override;
+	void drawTri(float x1, float y1, float x2, float y2, float x3, float y3);
+	void fillTri(float x1, float y1, float x2, float y2, float x3, float y3);
 	void setColor(int grey) override;
 	void setColor(int grey, int a) override;
 	void setColor(int r, int g, int b) override;

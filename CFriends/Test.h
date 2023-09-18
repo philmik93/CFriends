@@ -9,22 +9,23 @@ class Test : public App
 
 public:
 	
-	OpenGLTexture texturew;
+	OpenGLTexture* texturePtr;
 
 	inline void setup() override
 	{
+		
 		setSize(800, 800);
-		texturew = OpenGLTexture("res/textures/neurons.jpg");
+		setColor(200,200,100);
+		fillRect(0,0, 50, 50);
+		drawTri(200, 200, 400, 200, 300, 0);
+		
+		
 	}
 
 
 	inline void process(double dt) override
 	{
-		background(30);
 		
-		//glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		texture(texturew, 0, 0, texturew.getWidth(), texturew.getHeight());
 	}
 
 };

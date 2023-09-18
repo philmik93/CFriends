@@ -20,6 +20,8 @@ public:
 	virtual void fillCircle(float x, float y, float r) = 0;
 	virtual void drawCircle(float x, float y, float r) = 0;
 	virtual void drawCircle(float x, float y, float r1, float r2) = 0;
+	virtual void drawTri(float x1, float y1, float x2, float y2, float x3, float y3) = 0;
+	virtual void fillTri(float x1, float y1, float x2, float y2, float x3, float y3) = 0;
 	virtual void setColor(int grey) = 0;
 	virtual void setColor(int grey, int a) = 0;
 	virtual void setColor(int r, int g, int b) = 0;

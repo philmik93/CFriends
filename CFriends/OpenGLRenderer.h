@@ -10,6 +10,8 @@ private:
 
 
 public:
+	Shader* shader;
+
 	OpenGLRenderer();
 
 	void setWindow(Window* w);
@@ -21,6 +23,8 @@ public:
 	void fillCircle(float x, float y, float r);
 	void drawCircle(float x, float y, float r);
 	void drawCircle(float x, float y, float r1, float r2);
+	void drawTri(float x1, float y1, float x2, float y2, float x3, float y3);
+	void fillTri(float x1, float y1, float x2, float y2, float x3, float y3);
 	void setColor(int grey);
 	void setColor(int grey, int a);
 	void setColor(int r, int g, int b);

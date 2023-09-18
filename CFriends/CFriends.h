@@ -2,7 +2,15 @@
 #include "Include.h"
 
 
+enum Graphics
+{
+	LEGACY_OPENGL,
+	MODERN_OPENGL,
+	VULCAN
 
+};
+
+Graphics const currentGraphics = LEGACY_OPENGL;
 
 void run(App* a);
 
@@ -16,6 +24,8 @@ void fillCircle(float x, float y, float r1, float r2);
 void fillCircle(float x, float y, float r);
 void drawCircle(float x, float y, float r);
 void drawCircle(float x, float y, float r1, float r2);
+void drawTri(float x1, float y1, float x2, float y2, float x3, float y3);
+void fillTri(float x1, float y1, float x2, float y2, float x3, float y3);
 void setColor(int grey);
 void setColor(int grey, int a);
 void setColor(int r, int g, int b);

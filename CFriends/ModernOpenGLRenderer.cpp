@@ -119,6 +119,16 @@ void ModernOpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
 	}
 }
 
+void ModernOpenGLRenderer::drawTri(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	std::cout << "not ready yet\n"; //noch nicht fertig
+}
+
+void ModernOpenGLRenderer::fillTri(float x1, float y1, float x2, float y2, float x3, float y3)
+{
+	std::cout << "not ready yet\n"; //noch nicht fertig
+}
+
 
 
 void ModernOpenGLRenderer::setColor(int grey)
