@@ -8,30 +8,32 @@ class Test : public App
 
 
 public:
-	
-	OpenGLTexture* texturePtr;
+	CTexture* tex;
 
 	inline void setup() override
 	{
-		
-		setSize(800, 800);
-		setColor(200,200,100);
-		fillRect(0,0, 50, 50);
-		drawTri(200, 200, 400, 200, 300, 0);
-		
+		setSize(600,400);
 		
 	}
 
 
 	inline void process(double dt) override
 	{
-		
+		background(30);
+		setLineWidth(10);
+		fillRect(100,100, 100,100);
+		//drawRect(50,50,50,50);
 	}
 
 };
 
 
 
+
+int main()
+{
+	run(new Test());
+}
 
 
 

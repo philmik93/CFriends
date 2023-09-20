@@ -27,9 +27,9 @@ void Vehicle::display()
 	double theta = std::acos(vel.dot(&xAchse) / vel.getMag()) / M_PI * 180.0;
 
 	setColor(0);
-	drawCircle(pos.get(0) - r/2, pos.get(1) - r/2, r);
+	drawRect(pos.get(0) - r/2, pos.get(1) - r/2, r);
 	setColor(theta, theta / 2, 200);
-	fillCircle(pos.get(0) - r/2, pos.get(1) - r/2, r);
+	fillRect(pos.get(0) - r/2, pos.get(1) - r/2, r);
 	
 }
 

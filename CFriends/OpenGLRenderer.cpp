@@ -1,8 +1,8 @@
 #include "Include.h"
 
-OpenGLRenderer::OpenGLRenderer()
+OpenGLRenderer::OpenGLRenderer() : lineWidth(1), shader(nullptr), vaID(-1), vbID(-1)
 {
-	this->resolution = 40;
+	
 }
 
 void OpenGLRenderer::setWindow(Window* w)
@@ -38,24 +38,38 @@ void OpenGLRenderer::background(int r, int g, int b, int a)
 
 void OpenGLRenderer::fillCircle(float x, float y, float r1, float r2)
 {
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
 	shader->Bind();
 
+	float vertices[resolution * 2 + 4];
+	int index = 0;
 
-	float in[2] = { x, y };
-	float out[2];
-	toNDC(in, out);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(out[0], out[1]);
+	vertices[index] = x;
+	index++;
+	vertices[index] = y;
+	index++;
 
 	for (int i = 0; i <= resolution; i++)
 	{
-		in[0] = sinf(2 * M_PI / resolution * i) * r1 + x;
-		in[1] = cosf(2 * M_PI / resolution * i) * r2 + y;
-		toNDC(in, out);
-		glVertex2f(out[0], out[1]);
+		vertices[index] = sinf(2 * M_PI / resolution * i) * r1 + x;
+		index++;
+		vertices[index] = cosf(2 * M_PI / resolution * i) * r2 + y;
+		index++;
+		
 	}
+	
+	
+	glBindVertexArray(vaID);
+	glBindBuffer(GL_ARRAY_BUFFER, vbID);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
-	glEnd();
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
+	glDrawArrays(GL_TRIANGLE_FAN, 0, resolution+2);
+
+	
+	
 
 }
 
@@ -76,57 +90,92 @@ void OpenGLRenderer::drawCircle(float x, float y, float r)
 
 void OpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
 {
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
 
-	float in[2] = { x, y };
-	float out[2];
-	glBegin(GL_LINE_LOOP);
+
+	float vertices[resolution * 2 + 2];
+	int index = 0;
 
 	for (int i = 0; i <= resolution; i++)
 	{
-		in[0] = sinf(2 * M_PI / resolution * i) * r1 + x;
-		in[1] = cosf(2 * M_PI / resolution * i) * r2 + y;
-		toNDC(in, out);
-		glVertex2f(out[0], out[1]);
+		vertices[index] = sinf(2 * M_PI / resolution * i) * r1 + x;
+		index++;
+		vertices[index] = cosf(2 * M_PI / resolution * i) * r2 + y;
+		index++;
 	}
 
-	glEnd();
+	
+	glBindVertexArray(vaID);
+	glBindBuffer(GL_ARRAY_BUFFER, vbID);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
+	
+	glDrawArrays(GL_LINE_LOOP, 0, resolution+1);
 
 }
 
 void OpenGLRenderer::drawTri(float x1, float y1, float x2, float y2, float x3, float y3)
 {
-	float in[2] = {x1, y1}, out[2];
-	glBegin(GL_LINE_LOOP);
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	in[0] = x2; in[1] = y2;
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	in[0] = x3; in[1] = y3;
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	glEnd();
+	
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+	shader->Bind();
+
+	float vertices[] = {
+		x1, y1,
+		x2, y2,
+		x3, y3
+	};
+
+
+	glBindVertexArray(vaID);
+	glBindBuffer(GL_ARRAY_BUFFER, vbID);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+
+	glDrawArrays(GL_LINE_LOOP, 0, 3);
 }
 
 void OpenGLRenderer::fillTri(float x1, float y1, float x2, float y2, float x3, float y3)
 {
-	float in[2] = { x1, y1 }, out[2];
-	glBegin(GL_TRIANGLES);
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	in[0] = x2; in[1] = y2;
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	in[0] = x3; in[1] = y3;
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	glEnd();
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+	shader->Bind();
+
+	float vertices[] = {
+		x1, y1,
+		x2, y2,
+		x3, y3
+	};
+
+	bool added = false;
+	for (Batch* batch : batches)
+	{
+		if (batch->hasRoom())
+		{
+			batch->add(x1, y1, x2, y2, x3, y3);
+			added = true;
+			break;
+		}
+	}
+	if (!added)
+	{
+		Batch* batch = new Batch(this, shader);
+		batches.push_back(batch);
+		batch->add(x1, y1, x2, y2, x3, y3);
+	}
+	
 }
+
+
 
 void OpenGLRenderer::setColor(int grey)
 {
 	setColor(grey, grey, grey, 255);
 }
+
+
 
 
 void OpenGLRenderer::setColor(int grey, int a)
@@ -135,129 +184,156 @@ void OpenGLRenderer::setColor(int grey, int a)
 }
 
 
+
+
 void OpenGLRenderer::setColor(int r, int g, int b)
 {
 	setColor(r, g, b, 255);
 }
 
 
+
+
 void OpenGLRenderer::setColor(int r, int g, int b, int a)
 {
-	glColor4f((float)(r)/255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);
+	//glColor4f((float)(r)/255, (float)(g) / 255, (float)(b) / 255, (float)(a) / 255);   only for the default shader ("Fixed Function Pipeline" and not "Programmable Pipeline")
+	color = {r,g,b,a};
 }
+
+
+
 
 void OpenGLRenderer::setLineWidth(float w)
 {
-	glLineWidth(w);
+	lineWidth = w;
+	//glLineWidth(w);        only for the default shader ("Fixed Function Pipeline" and not "Programmable Pipeline") 
 }
+
+
+
 
 void OpenGLRenderer::line(float x1, float y1, float x2, float y2)
 {
-	float in[2] = { x1, y1 };
-	float out[2];
-	toNDC(in, out);
-	glBegin(GL_LINES);
-	glVertex2f(out[0], out[1]);
-	in[0] = x2, in[1] = y2;
-	toNDC(in, out);
-	glVertex2f(out[0], out[1]);
-	glEnd();
+	shader->Bind();
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+
+
+
+	CVector<float> a(x1, y1);
+	CVector<float> b(x1, y2);
+	CVector<float> vec;
+	CVector<float> xAchse(1, 0);
+	CVector<float>::sub(&a, &b, &vec);
+	
+	float theta = std::acosf(CVector<float>::dot(&vec, &xAchse)/vec.getMag());
+	theta += 5.0f / 4.0f * M_PI;
+
+	float rotArr[4] = {cosf(theta), sinf(theta), -sinf(theta), cosf(theta)};
+	CMatrix<float> rotMat(2,2);
+	rotMat.fromArray(rotArr, 2, 2);
+
+
+
+	fillTri(
+		x1 - lineWidth / 2, y1 - lineWidth / 2,
+		x1 - lineWidth / 2, y1 + lineWidth / 2,
+		x2 + lineWidth / 2, y2 + lineWidth / 2 
+		);
+	fillTri(
+		x1 - lineWidth / 2, y1 - lineWidth / 2,
+		x2 + lineWidth / 2, y2 + lineWidth / 2,
+		x2 + lineWidth / 2, y2 - lineWidth / 2
+	);
+
 }
+
+
+
 
 void OpenGLRenderer::fillRect(float x, float y, float w, float h)
 {
-	float in[2] = { x, y };
-	float out1[2], out2[2], out3[2], out4[2];
-	toNDC(in, out1);
-	in[1] = y + h;
-	toNDC(in, out2);
-	in[0] = x + w;
-	in[1] = y;
-	toNDC(in, out3);
-	in[0] = x + w;
-	in[1] = y + h;
-	toNDC(in, out4);
-	glBegin(GL_TRIANGLES);
-	glVertex2f(out1[0], out1[1]);
-	glVertex2f(out2[0], out2[1]);
-	glVertex2f(out3[0], out3[1]);
-	glVertex2f(out3[0], out3[1]);
-	glVertex2f(out2[0], out2[1]);
-	glVertex2f(out4[0], out4[1]);
-	glEnd();
+	shader->Bind();
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+	
+
+	fillTri(x, y, x + w, y, x + w, y + h);
+	fillTri(x, y, x+w, y+h, x, y+h);
 }
+
+
+
 
 void OpenGLRenderer::fillRect(float x, float y, float s)
 {
 	fillRect(x, y, s, s);
 }
 
+
+
+
 void OpenGLRenderer::drawRect(float x, float y, float w, float h)
 {
-	float in[2] = { x, y };
-	float out1[2], out2[2], out3[2], out4[2];
-	toNDC(in, out1);
-	in[1] = y + h;
-	toNDC(in, out2);
-	in[0] = x + w;
-	in[1] = y;
-	toNDC(in, out3);
-	in[0] = x + w;
-	in[1] = y + h;
-	toNDC(in, out4);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(out1[0], out1[1]);
-	glVertex2f(out2[0], out2[1]);
-	glVertex2f(out4[0], out4[1]);
-	glVertex2f(out3[0], out3[1]);
-	glEnd();
+	
+	shader->Bind();
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+	
+	float vertices[] = {
+		x, y,
+		x, y + h,
+		x + w, y + h,
+		x + w, y
+		
+						};
 
+	line(x, y, x + w, y);
+	//line(x + w, y, x + w, y + h);
+	line(x + w, y + h, x, y + h);
+	//line(x, y + h, x , y);
 }
+
+
+
+
 
 void OpenGLRenderer::drawRect(float x, float y, float s)
 {
 	drawRect(x, y, s, s);
 }
 
-void OpenGLRenderer::loadTexture(std::string path)
-{
 
+
+
+
+CTexture* OpenGLRenderer::loadTexture(std::string path)
+{
+	return new OpenGLTexture(path);
 }
 
-void OpenGLRenderer::texture(CTexture& texture, double x, double y, double w, double h)
+
+
+
+
+void OpenGLRenderer::texture(CTexture* texture, double x, double y, double w, double h)
 {
-	
+	shader->setUniform1i("DRAW", TEXTURE_DRAW);
 	shader->Bind();
-	texture.bind(0);
-	float in[2] = { x, y };
-	float out1[2], out2[2], out3[2], out4[2];
-	toNDC(in, out1);
-	in[1] = y + h;
-	toNDC(in, out2);
-	in[0] = x + w;
-	in[1] = y;
-	toNDC(in, out3);
-	in[0] = x + w;
-	in[1] = y + h;
-	toNDC(in, out4);
+	texture->bind(0);
+	
 	
 	shader->setUniform1i("u_texture", 0);
 	
-	unsigned int vbID, vaID;
 	float vertices[] = {
-		out1[0], out1[1], 0.0f, 0.0f,
-		out2[0], out2[1], 0.0f, 1.0f,
-		out3[0], out3[1], 1.0f, 0.0f,
-		out3[0], out3[1], 1.0f, 0.0f,
-		out2[0], out2[1], 0.0f, 1.0f,
-		out4[0], out4[1], 1.0f, 1.0f
+		x,   y,   0.0f, 0.0f,
+		x,   y+h, 0.0f, 1.0f,
+		x+w, y,   1.0f, 0.0f,
+		x+w, y,   1.0f, 0.0f,
+		x,   y+h, 0.0f, 1.0f,
+		x+w, y+h, 1.0f, 1.0f
 		
 		
 	};
-	glGenVertexArrays(1, &vaID);
+	
 	glBindVertexArray(vaID);
-
-	glGenBuffers(1, &vbID);
 	glBindBuffer(GL_ARRAY_BUFFER, vbID);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
@@ -270,19 +346,34 @@ void OpenGLRenderer::texture(CTexture& texture, double x, double y, double w, do
 
 
 
+
+
+
 void OpenGLRenderer::render()
 {
+	for (Batch* batch : batches) batch->render();
 }
+
+
+
+
 
 void OpenGLRenderer::prepareFrame() // kann eigentlich echt weg
 {
 	//glClear(GL_COLOR_BUFFER_BIT);
 }
 
+
+
+
+
 void OpenGLRenderer::refreshFramebuffer(int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
+
+
+
 
 void OpenGLRenderer::init()
 {
@@ -293,10 +384,22 @@ void OpenGLRenderer::init()
 	std::cout << "init\n";
 	shader = new Shader("res/shaders/Basic.shader");
 	shader->Bind();
-	glColor4f(0.8f, 0.7f, 0.0f, 1.0f);
+	shader->setUniform1i("DRAW", SHAPE_DRAW);
+	setColor(255,0,255,255);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	
+	glGenVertexArrays(1, &vaID);
+	glBindVertexArray(vaID);
+
+	glGenBuffers(1, &vbID);
+	glBindBuffer(GL_ARRAY_BUFFER, vbID);
+	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*(resolution * 2 + 4), NULL, GL_DYNAMIC_DRAW);
+
 	
 }
+
+
 
 
 
@@ -309,9 +412,11 @@ void OpenGLRenderer::toNDC(float* in, float* out)
 
 
 
+
+
 void OpenGLRenderer::errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
-
+	if (type == 33361) return;
 	std::cout << "OpenGL Debug Message:" << std::endl;
 	std::cout << "Source: " << source << std::endl;
 	std::cout << "Type: " << type << std::endl;

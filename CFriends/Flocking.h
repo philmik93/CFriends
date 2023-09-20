@@ -6,7 +6,7 @@
 class Flocking : public App
 {
 public:
-	static const int VEHICLE_COUNT = 130;
+	static const int VEHICLE_COUNT = 400;
 	Vehicle vehicles[VEHICLE_COUNT];
 
 public:
@@ -43,3 +43,4 @@ int main()
 	run(new Flocking());
 }
 */
+

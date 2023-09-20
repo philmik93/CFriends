@@ -1,6 +1,6 @@
 #pragma once
 #include "Include.h"
-template<typename T, int SIZE=-1>
+template<typename T>
 class CVector
 {
 
@@ -9,27 +9,19 @@ class CVector
 private:
 	int count;
 	T* elements;
-	
+
 
 
 public:
 
-	inline CVector<T, SIZE>()
+	inline CVector<T>()
 	{
-		if (SIZE = -1)
-		{
-			count = 0;
-			elements = nullptr;
-		}
-		else
-		{
-			count = SIZE;
-			elements = nullptr;
-		}
+		count = 0;
+		elements = nullptr;
 	}
 
 
-	inline CVector<T, SIZE>(std::initializer_list<T> values)
+	inline CVector<T>(std::initializer_list<T> values)
 	{
 		count = values.size();
 		int counter = 0;
@@ -42,14 +34,14 @@ public:
 	}
 
 
-	inline CVector<T, SIZE>(T x)
+	inline CVector<T>(T x)
 	{
 		count = 1;
 		elements = new T[1];
 		elements[0] = x;
 	}
 
-	inline CVector<T, SIZE>(T x, T y)
+	inline CVector<T>(T x, T y)
 	{
 		count = 2;
 		elements = new T[2];
@@ -57,7 +49,7 @@ public:
 		elements[1] = y;
 	}
 
-	inline CVector<T, SIZE>(T x, T y, T z)
+	inline CVector<T>(T x, T y, T z)
 	{
 		count = 3;
 		elements = new T[3];
@@ -68,9 +60,9 @@ public:
 
 
 
-	
 
-	inline CVector<T, SIZE>(const CVector<T, SIZE>& other) 
+
+	inline CVector<T>(const CVector<T>& other)
 	{
 		count = other.count;
 		elements = new T[count];
@@ -90,7 +82,7 @@ public:
 
 
 
-	inline CVector<T, SIZE>& operator=(const CVector<T, SIZE>& other)
+	inline CVector<T>& operator=(const CVector<T>& other)
 	{
 		if (this != &other)
 		{
@@ -106,12 +98,12 @@ public:
 	}
 
 
-	friend inline std::ostream& operator<<(std::ostream& os, const CVector<T, SIZE>& obj)
+	friend inline std::ostream& operator<<(std::ostream& os, const CVector<T>& obj)
 	{
 		os << obj.toString();
 		return os;
 	}
-	
+
 
 
 
@@ -158,8 +150,8 @@ public:
 	}
 
 
-	
-	inline CVector<T, SIZE>* normalize()
+
+	inline CVector<T>* normalize()
 	{
 		double mag = getMag();
 		if (mag != 0) return this->mult(1 / mag);
@@ -172,7 +164,7 @@ public:
 
 
 
-	inline static double dot(const CVector<T, SIZE>* a, const CVector<T, SIZE>* b)
+	inline static double dot(const CVector<T>* a, const CVector<T>* b)
 	{
 		if (a->count != b->count)
 		{
@@ -189,11 +181,11 @@ public:
 
 
 
-	inline double dot(const CVector<T, SIZE>* vec)
+	inline double dot(const CVector<T>* vec)
 	{
 		if (count != vec->count)
 		{
-			std::cout << "Dot Product not possible, Vectors do not match! " << count  << " to " << vec->count << "\n";
+			std::cout << "Dot Product not possible, Vectors do not match! " << count << " to " << vec->count << "\n";
 			return -1;
 		}
 		double dot = 0;
@@ -204,10 +196,10 @@ public:
 		return dot;
 	}
 
-	
 
 
-	inline CVector<T, SIZE>* add(const CVector<T, SIZE>* vec)
+
+	inline CVector<T>* add(const CVector<T>* vec)
 	{
 		if (vec->count != count)
 		{
@@ -222,9 +214,9 @@ public:
 	}
 
 
-	inline CVector<T, SIZE>* add(const T v)
+	inline CVector<T>* add(const T v)
 	{
-		
+
 		for (int i = 0; i < count; i++)
 		{
 			elements[i] += v;
@@ -239,7 +231,7 @@ public:
 
 
 
-	inline static CVector<T, SIZE>* add(const CVector<T, SIZE>* vec1, const CVector<T, SIZE>* vec2, CVector<T, SIZE>* target)
+	inline static CVector<T>* add(const CVector<T>* vec1, const CVector<T>* vec2, CVector<T>* target)
 	{
 		if (vec1->count != vec2->count) return nullptr;
 
@@ -259,7 +251,7 @@ public:
 
 
 
-	inline static CVector<T, SIZE>* add(const CVector<T, SIZE>* vec1, const T v, CVector<T, SIZE>* target)
+	inline static CVector<T>* add(const CVector<T>* vec1, const T v, CVector<T>* target)
 	{
 		delete[] target->elements;
 		target->elements = new T[vec1->count];
@@ -281,7 +273,7 @@ public:
 
 
 
-	inline CVector<T, SIZE>* sub(const CVector<T, SIZE>* vec)
+	inline CVector<T>* sub(const CVector<T>* vec)
 	{
 		if (vec->count != count)
 		{
@@ -297,9 +289,9 @@ public:
 	}
 
 
-	inline CVector<T, SIZE>* sub(const T v)
+	inline CVector<T>* sub(const T v)
 	{
-		
+
 		for (int i = 0; i < count; i++)
 		{
 			elements[i] -= v;
@@ -310,7 +302,7 @@ public:
 
 
 
-	inline static CVector<T, SIZE>* sub(const CVector<T, SIZE>* vec1, const CVector<T, SIZE>* vec2, CVector<T, SIZE>* target)
+	inline static CVector<T>* sub(const CVector<T>* vec1, const CVector<T>* vec2, CVector<T>* target)
 	{
 		if (vec1->count != vec2->count) return nullptr;
 
@@ -330,7 +322,7 @@ public:
 
 
 
-	inline static CVector<T, SIZE>* sub(const CVector<T, SIZE>* vec1, const T v, CVector<T, SIZE>* target)
+	inline static CVector<T>* sub(const CVector<T>* vec1, const T v, CVector<T>* target)
 	{
 		delete[] target->elements;
 		target->elements = new T[vec1->count];
@@ -351,7 +343,7 @@ public:
 
 
 
-	inline CVector<T, SIZE>* mult(const CVector<T, SIZE>* vec)
+	inline CVector<T>* mult(const CVector<T>* vec)
 	{
 		if (vec->count != count)
 		{
@@ -367,7 +359,7 @@ public:
 
 
 
-	inline CVector<T, SIZE>* mult(const T s)
+	inline CVector<T>* mult(const T s)
 	{
 		for (int i = 0; i < count; i++)
 		{
@@ -377,7 +369,7 @@ public:
 	}
 
 
-	inline static CVector<T, SIZE>* mult(const CVector<T, SIZE>* vec1, const CVector<T, SIZE>* vec2, CVector<T, SIZE>* target)
+	inline static CVector<T>* mult(const CVector<T>* vec1, const CVector<T>* vec2, CVector<T>* target)
 	{
 		if (vec1->count != vec2->count) return nullptr;
 
@@ -393,7 +385,7 @@ public:
 
 
 
-	inline static CVector<T, SIZE>* mult(const CVector<T, SIZE>* vec1, const T s, CVector<T, SIZE>* target)
+	inline static CVector<T>* mult(const CVector<T>* vec1, const T s, CVector<T>* target)
 	{
 		delete[] target->elements;
 		target->elements = new T[vec1->count];
@@ -407,7 +399,7 @@ public:
 
 
 
-	inline CVector<T, SIZE> randomize(const T min,  const T max)
+	inline CVector<T> randomize(const T min, const T max)
 	{
 		std::random_device rd;
 		std::mt19937 gen(rd());

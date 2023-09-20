@@ -6,6 +6,11 @@ class Window;
 
 class Renderer
 {
+
+public:
+	static const int SHAPE_DRAW = 0;
+	static const int TEXTURE_DRAW = 1;
+
 protected:
 	Window* window;
 
@@ -32,8 +37,8 @@ public:
 	virtual void fillRect(float x, float y, float s) = 0;
 	virtual void drawRect(float x, float y, float w, float h) = 0;
 	virtual void drawRect(float x, float y, float s) = 0;
-	virtual void loadTexture(std::string) = 0;
-	virtual void texture(CTexture& texture, double x, double y, double w, double h) = 0;
+	virtual CTexture* loadTexture(std::string) = 0;
+	virtual void texture(CTexture* texture, double x, double y, double w, double h) = 0;
 
 	virtual void render() = 0;
 	virtual void prepareFrame() = 0;

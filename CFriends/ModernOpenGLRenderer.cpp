@@ -309,7 +309,7 @@ void ModernOpenGLRenderer::init()
 	glDebugMessageCallback(errorCallback, nullptr);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	shader = new Shader("res/shaders/Basic.shader");
+	shader = new Shader("res/shaders/Modern.shader");
 }
 
 

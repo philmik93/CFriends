@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="Batch.h" />
     <ClInclude Include="Bloob.h" />
     <ClInclude Include="Bloobs.h" />
     <ClInclude Include="CircleRenderBatch.h" />
@@ -68,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Batch.cpp" />
     <ClCompile Include="Bloob.cpp" />
     <ClCompile Include="Bloobs.cpp" />
     <ClCompile Include="CircleRenderBatch.cpp" />
@@ -110,6 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Modern.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\neurons.jpg" />

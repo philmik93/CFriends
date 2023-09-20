@@ -134,12 +134,12 @@ void drawRect(float x, float y, float s)
 	mainWindow->renderer->drawRect(x, y, s);
 }
 
-void loadTexture(std::string path)
+CTexture* loadTexture(std::string path)
 {
-	mainWindow->renderer->loadTexture(path);
+	return mainWindow->renderer->loadTexture(path);
 }
 
-void texture(CTexture& texture, double x, double y, double w, double h)
+void texture(CTexture* texture, double x, double y, double w, double h)
 {
 	mainWindow->renderer->texture(texture, x, y, w, h);
 }

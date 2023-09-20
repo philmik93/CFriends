@@ -228,6 +228,9 @@
     <ClInclude Include="stb_image.h">
       <Filter>Headerdateien\Vendor</Filter>
     </ClInclude>
+    <ClInclude Include="Batch.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -350,9 +353,13 @@
     <ClCompile Include="stb_image.cpp">
       <Filter>Headerdateien\Vendor</Filter>
     </ClCompile>
+    <ClCompile Include="Batch.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\Basic.shader" />
+    <None Include="res\shaders\Modern.shader" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\textures\neurons.jpg">

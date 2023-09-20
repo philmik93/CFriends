@@ -1,13 +1,31 @@
 #pragma once
 #include "Include.h"
 
+class Batch;
 
 class OpenGLRenderer : public Renderer
 {
 
-private:
-	int resolution;
 
+
+
+
+public:
+
+	struct Color
+	{
+		int r;
+		int g;
+		int b;
+		int a;
+	};
+
+	unsigned int vbID, vaID;
+	Color color = { 255, 255, 255, 255 };
+private:
+	static const int resolution = 40;
+	std::vector<Batch*> batches;
+	float lineWidth;
 
 public:
 	Shader* shader;
@@ -35,8 +53,8 @@ public:
 	void fillRect(float x, float y, float s);
 	void drawRect(float x, float y, float w, float h);
 	void drawRect(float x, float y, float s);
-	void loadTexture(std::string path);
-	void texture(CTexture& texture, double x, double y, double w, double h);
+	CTexture* loadTexture(std::string path);
+	void texture(CTexture* texture, double x, double y, double w, double h);
 
 	void render();
 	void prepareFrame();

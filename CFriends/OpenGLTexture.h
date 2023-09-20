@@ -15,11 +15,10 @@ public:
 	OpenGLTexture(const std::string& path);
 	~OpenGLTexture();
 
-	void bind(unsigned int slot = 0) const;
-	void unbind() const;
+	void bind(unsigned int slot = 0) const override;
+	void unbind() const override;
 
-	
 
-	inline int getWidth() const { return m_Width; }
-	inline int getHeight() const { return m_Height; }
+	inline int getWidth() const override { return m_Width; } 
+	inline int getHeight() const override{ return m_Height; }
 };
