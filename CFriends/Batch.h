@@ -4,8 +4,8 @@
 class Batch
 {
 public:
-	static const int MAX_TRIANGLES = 2000;
-	static const int VERTEX_ELEMENT_COUNT = 2;
+	static const int MAX_TRIANGLES = 8000;
+	static const int VERTEX_ELEMENT_COUNT = 7;
 	static const int VERTEX_SIZE = VERTEX_ELEMENT_COUNT * sizeof(float);
 	
 

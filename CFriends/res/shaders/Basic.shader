@@ -1,13 +1,15 @@
 #shader vertex
 #version 330 core
 layout(location = 0) in vec2 position;
-layout(location = 1) in vec4 color;
-layout(location = 2) in vec2 texCoords;
+layout(location = 1) in float rotation;
+layout(location = 2) in vec4 colorIn;
+layout(location = 3) in vec2 texCoords;
 out vec4 vertexColor;
 out vec2 v_texCoords;
 
 float a;
 float b;
+vec4 colorTrans;
 
 uniform vec4 u_color;
 
@@ -19,7 +21,13 @@ void main() {
 
 
 	gl_Position = vec4(a, b, 0.0, 1);
-	vertexColor = u_color;
+
+	colorTrans[0] = colorIn[0] / 255.0;
+	colorTrans[1] = colorIn[1] / 255.0;
+	colorTrans[2] = colorIn[2] / 255.0;
+	colorTrans[3] = colorIn[3] / 255.0;
+
+	vertexColor = colorTrans;
 	v_texCoords = texCoords;
 }
 
@@ -44,6 +52,6 @@ void main() {
 	}
 	else if (DRAW == 0)
 	{
-		color = vec4(1.0,0,1.0,1.0);
+		color = vertexColor;
 	}
 }

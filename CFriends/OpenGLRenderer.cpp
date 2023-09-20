@@ -339,8 +339,8 @@ void OpenGLRenderer::texture(CTexture* texture, double x, double y, double w, do
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -385,7 +385,7 @@ void OpenGLRenderer::init()
 	shader = new Shader("res/shaders/Basic.shader");
 	shader->Bind();
 	shader->setUniform1i("DRAW", SHAPE_DRAW);
-	setColor(255,0,255,255);
+	setColor(240,225,40,200);
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	
