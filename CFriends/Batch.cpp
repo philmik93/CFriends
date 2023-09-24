@@ -17,7 +17,10 @@ Batch::Batch(OpenGLRenderer* renderer, Shader* shader) : renderer(renderer), sha
 	glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * VERTEX_ELEMENT_COUNT, (const void*)(sizeof(float)*2));
 
 	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * VERTEX_ELEMENT_COUNT, (const void*)(sizeof(float)*3));
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * VERTEX_ELEMENT_COUNT, (const void*)(sizeof(float)*3));
+
+	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * VERTEX_ELEMENT_COUNT, (const void*)(sizeof(float)*5));
 }
 
 
@@ -70,11 +73,13 @@ void Batch::add(float x1, float y1, float x2, float y2, float x3, float y3)
 
 	for (int i = 0; i < 3; i++)
 	{
-		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 2 + VERTEX_ELEMENT_COUNT*i] = 1;
-		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 3 + VERTEX_ELEMENT_COUNT*i] = renderer->color.r;
-		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 4 + VERTEX_ELEMENT_COUNT*i] = renderer->color.g;
-		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 5 + VERTEX_ELEMENT_COUNT*i] = renderer->color.b;
-		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 6 + VERTEX_ELEMENT_COUNT*i] = renderer->color.a;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 2 + VERTEX_ELEMENT_COUNT * i] = renderer->rotation;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 3 + VERTEX_ELEMENT_COUNT * i] = renderer->translationX;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 4 + VERTEX_ELEMENT_COUNT * i] = renderer->translationY;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 5 + VERTEX_ELEMENT_COUNT * i] = renderer->color.r;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 6 + VERTEX_ELEMENT_COUNT * i] = renderer->color.g;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 7 + VERTEX_ELEMENT_COUNT * i] = renderer->color.b;
+		vertices[currentTriangleCount * 3 * VERTEX_ELEMENT_COUNT + 8 + VERTEX_ELEMENT_COUNT * i] = renderer->color.a;
 	}
 
 	

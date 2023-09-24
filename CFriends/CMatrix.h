@@ -69,6 +69,27 @@ public:
 
 
 
+	inline CMatrix<T>& operator=(const CMatrix<T>& other)
+	{
+		if (this != &other)
+		{
+			for (int i = 0; i < rows; i++) delete[] elements[i];
+			delete[] elements;
+			rows = other.rows;
+			columns = other.columns;
+			elements = new T * [rows];
+			for (int i = 0; i < rows; i++) elements[i] = new T[columns];
+
+			for (int i = 0; i < rows; i++)
+				for (int j = 0; j < columns; j++)
+				{
+					elements[i][j] = other.elements[i][j];
+				}
+		}
+		return *this;
+	}
+
+
 	friend inline std::ostream& operator<<(std::ostream& os, const CMatrix<T>& obj)
 	{
 		os << obj.toString();

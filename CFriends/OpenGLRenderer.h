@@ -22,6 +22,9 @@ public:
 
 	unsigned int vbID, vaID;
 	Color color = { 255, 255, 255, 255 };
+	float rotation;
+	float translationX;
+	float translationY;
 private:
 	static const int resolution = 40;
 	std::vector<Batch*> batches;
@@ -53,6 +56,7 @@ public:
 	void fillRect(float x, float y, float s);
 	void drawRect(float x, float y, float w, float h);
 	void drawRect(float x, float y, float s);
+	void rotate(float radiant);
 	CTexture* loadTexture(std::string path);
 	void texture(CTexture* texture, double x, double y, double w, double h);
 

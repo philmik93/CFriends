@@ -23,11 +23,8 @@
     <ClInclude Include="Batch.h" />
     <ClInclude Include="Bloob.h" />
     <ClInclude Include="Bloobs.h" />
-    <ClInclude Include="CircleRenderBatch.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="CVector.h" />
-    <ClInclude Include="DrawCircleRenderBatch.h" />
-    <ClInclude Include="DrawRectRenderBatch.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Field.h" />
     <ClInclude Include="Flocking.h" />
@@ -37,12 +34,9 @@
     <ClInclude Include="Include.h" />
     <ClInclude Include="GLFWKeyListener.h" />
     <ClInclude Include="CFriends.h" />
-    <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="LinearRegression.h" />
-    <ClInclude Include="LineRenderBatch.h" />
     <ClInclude Include="CMatrix.h" />
     <ClInclude Include="Minigame.h" />
-    <ClInclude Include="ModernOpenGLRenderer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="OpenGLTexture.h" />
@@ -52,8 +46,6 @@
     <ClInclude Include="PhysicsEngine2D.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Population.h" />
-    <ClInclude Include="RectRenderBatch.h" />
-    <ClInclude Include="RenderBatch.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="stb_image.h" />
@@ -62,9 +54,6 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="CTexture.h" />
     <ClInclude Include="Vehicle.h" />
-    <ClInclude Include="VertexArray.h" />
-    <ClInclude Include="VertexBuffer.h" />
-    <ClInclude Include="VertexBufferLayout.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +61,8 @@
     <ClCompile Include="Batch.cpp" />
     <ClCompile Include="Bloob.cpp" />
     <ClCompile Include="Bloobs.cpp" />
-    <ClCompile Include="CircleRenderBatch.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="CTexture.cpp" />
-    <ClCompile Include="DrawCircleRenderBatch.cpp" />
-    <ClCompile Include="DrawRectRenderBatch.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="Food.cpp" />
@@ -84,11 +70,8 @@
     <ClCompile Include="GLFWWindow.cpp" />
     <ClCompile Include="GLFWKeyListener.cpp" />
     <ClCompile Include="CFriends.cpp" />
-    <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="LinearRegression.cpp" />
-    <ClCompile Include="LineRenderBatch.cpp" />
     <ClCompile Include="Minigame.cpp" />
-    <ClCompile Include="ModernOpenGLRenderer.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OpenGLRenderer.cpp" />
     <ClCompile Include="OpenGLTexture.cpp" />
@@ -97,8 +80,6 @@
     <ClCompile Include="PhysicsEngine2D.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Population.cpp" />
-    <ClCompile Include="RectRenderBatch.cpp" />
-    <ClCompile Include="RenderBatch.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb_image.cpp" />
@@ -106,8 +87,6 @@
     <ClCompile Include="System.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Vehicle.cpp" />
-    <ClCompile Include="VertexArray.cpp" />
-    <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>

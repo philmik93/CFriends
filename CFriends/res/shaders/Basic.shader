@@ -2,8 +2,9 @@
 #version 330 core
 layout(location = 0) in vec2 position;
 layout(location = 1) in float rotation;
-layout(location = 2) in vec4 colorIn;
-layout(location = 3) in vec2 texCoords;
+layout(location = 2) in vec2 translation;
+layout(location = 3) in vec4 colorIn;
+layout(location = 4) in vec2 texCoords;
 out vec4 vertexColor;
 out vec2 v_texCoords;
 

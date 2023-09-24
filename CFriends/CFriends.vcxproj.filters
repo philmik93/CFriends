@@ -129,38 +129,8 @@
     <ClInclude Include="Particle.h">
       <Filter>Headerdateien\Examples\ParticleSystem</Filter>
     </ClInclude>
-    <ClInclude Include="ModernOpenGLRenderer.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="RectRenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>Headerdateien\Examples\Testing</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="IndexBuffer.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBuffer.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexBufferLayout.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="VertexArray.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleRenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="LineRenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsEngine2D.h">
       <Filter>Headerdateien\Examples\PhysicsEngine2D</Filter>
@@ -185,12 +155,6 @@
     </ClInclude>
     <ClInclude Include="Field.h">
       <Filter>Headerdateien\Examples\Sudoku</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawCircleRenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawRectRenderBatch.h">
-      <Filter>Headerdateien\Framework\ModernOpenGLRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Bloobs.h">
       <Filter>Headerdateien\Examples\Bloobs</Filter>
@@ -231,6 +195,9 @@
     <ClInclude Include="Batch.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -266,35 +233,8 @@
     <ClCompile Include="Particle.cpp">
       <Filter>Quelldateien\Examples\ParticleSystem</Filter>
     </ClCompile>
-    <ClCompile Include="ModernOpenGLRenderer.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="RectRenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>Quelldateien\Examples\Testing</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="IndexBuffer.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexBuffer.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="VertexArray.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleRenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="LineRenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsEngine2D.cpp">
       <Filter>Quelldateien\Examples\PhysicsEngine2D</Filter>
@@ -316,12 +256,6 @@
     </ClCompile>
     <ClCompile Include="Field.cpp">
       <Filter>Quelldateien\Examples\Sudoku</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawCircleRenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawRectRenderBatch.cpp">
-      <Filter>Quelldateien\Framework\ModernOpenGLRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Bloobs.cpp">
       <Filter>Quelldateien\Examples\Bloobs</Filter>
@@ -354,6 +288,9 @@
       <Filter>Headerdateien\Vendor</Filter>
     </ClCompile>
     <ClCompile Include="Batch.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
   </ItemGroup>

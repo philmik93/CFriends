@@ -134,6 +134,18 @@ void drawRect(float x, float y, float s)
 	mainWindow->renderer->drawRect(x, y, s);
 }
 
+void rotate(float radiant)
+{
+	mainWindow->renderer->rotate(radiant);
+}
+
+float radians(float degree)
+{
+	return degree / 360.0f * M_2_PI;
+}
+
+
+
 CTexture* loadTexture(std::string path)
 {
 	return mainWindow->renderer->loadTexture(path);

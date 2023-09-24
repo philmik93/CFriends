@@ -1,6 +1,6 @@
 #include "Include.h"
 
-OpenGLRenderer::OpenGLRenderer() : lineWidth(1), shader(nullptr), vaID(-1), vbID(-1)
+OpenGLRenderer::OpenGLRenderer() : lineWidth(1), shader(nullptr), vaID(-1), vbID(-1), translationX(0), translationY(0), rotation(0)
 {
 	
 }
@@ -219,21 +219,73 @@ void OpenGLRenderer::line(float x1, float y1, float x2, float y2)
 
 
 
+
+
 	CVector<float> a(x1, y1);
-	CVector<float> b(x1, y2);
+	CVector<float> b(x2, y2);
 	CVector<float> vec;
 	CVector<float> xAchse(1, 0);
 	CVector<float>::sub(&a, &b, &vec);
+
+	float theta = std::acosf(CVector<float>::dot(&vec, &xAchse) / vec.getMag());
+	std::cout << "\n" << theta << "\n";
+
 	
-	float theta = std::acosf(CVector<float>::dot(&vec, &xAchse)/vec.getMag());
-	theta += 5.0f / 4.0f * M_PI;
+	if (y2 < y1) theta = M_PI - theta;
+	else theta += M_PI;
+	float rotArr[4] = { cosf(theta), sinf(theta), -sinf(theta), cosf(theta) };
+	CMatrix<float> rotMat(2, 2);
+	rotMat = CMatrix<float>::fromArray(rotArr, 2, 2);
 
-	float rotArr[4] = {cosf(theta), sinf(theta), -sinf(theta), cosf(theta)};
-	CMatrix<float> rotMat(2,2);
-	rotMat.fromArray(rotArr, 2, 2);
+	//std::cout << "rotation matrix\n" << rotMat;
+
+	CMatrix<float> vert1(2, 1);
+	vert1.set(-lineWidth / 2, 1, 1);
+	vert1.set(-lineWidth / 2, 2, 1);
+
+	CMatrix<float> vert2(2, 1);
+	vert2.set(-lineWidth / 2, 1, 1);
+	vert2.set(+lineWidth / 2, 2, 1);
+
+	CMatrix<float> vert3(2, 1);
+	vert3.set(+lineWidth / 2, 1, 1);
+	vert3.set(+lineWidth / 2, 2, 1);
+
+	CMatrix<float> vert4(2, 1);
+	vert4.set(-lineWidth / 2, 1, 1);
+	vert4.set(-lineWidth / 2, 2, 1);
+
+	CMatrix<float> vert5(2, 1);
+	vert5.set(+lineWidth / 2, 1, 1);
+	vert5.set(+lineWidth / 2, 2, 1);
+
+	CMatrix<float> vert6(2, 1);
+	vert6.set(+lineWidth / 2, 1, 1);
+	vert6.set(-lineWidth / 2, 2, 1);
+
+	CMatrix<float> rvert1 = CMatrix<float>::mult(rotMat, vert1);
+	//vert1.print();
+	//rvert1.print();
+	CMatrix<float> rvert2 = CMatrix<float>::mult(rotMat, vert2);
+	//vert2.print();
+	//rvert2.print();
+	CMatrix<float> rvert3 = CMatrix<float>::mult(rotMat, vert3);
+	//vert3.print();
+	//rvert3.print();
+	CMatrix<float> rvert4 = CMatrix<float>::mult(rotMat, vert4);
+	//vert4.print();
+	//rvert4.print();
+	CMatrix<float> rvert5 = CMatrix<float>::mult(rotMat, vert5);
+	//vert5.print();
+	//rvert5.print();
+	CMatrix<float> rvert6 = CMatrix<float>::mult(rotMat, vert6);
+	//vert6.print();
+	//rvert6.print();
 
 
+	
 
+/*
 	fillTri(
 		x1 - lineWidth / 2, y1 - lineWidth / 2,
 		x1 - lineWidth / 2, y1 + lineWidth / 2,
@@ -244,6 +296,22 @@ void OpenGLRenderer::line(float x1, float y1, float x2, float y2)
 		x2 + lineWidth / 2, y2 + lineWidth / 2,
 		x2 + lineWidth / 2, y2 - lineWidth / 2
 	);
+*/
+
+
+
+	fillTri(
+		x1 + rvert1.get(1, 1), y1 + rvert1.get(2, 1),
+		x1 + rvert2.get(1, 1), y1 + rvert2.get(2, 1),
+		x2 + rvert3.get(1, 1), y2 + rvert3.get(2, 1)
+	);
+	fillTri(
+		x1 + rvert4.get(1, 1), y1 + rvert4.get(2, 1),
+		x2 + rvert5.get(1, 1), y2 + rvert5.get(2, 1),
+		x2 + rvert6.get(1, 1), y2 + rvert6.get(2, 1)
+	);
+
+
 
 }
 
@@ -286,9 +354,9 @@ void OpenGLRenderer::drawRect(float x, float y, float w, float h)
 						};
 
 	line(x, y, x + w, y);
-	//line(x + w, y, x + w, y + h);
+	line(x + w, y, x + w, y + h);
 	line(x + w, y + h, x, y + h);
-	//line(x, y + h, x , y);
+	line(x, y + h, x , y);
 }
 
 
@@ -339,9 +407,14 @@ void OpenGLRenderer::texture(CTexture* texture, double x, double y, double w, do
 
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-	glEnableVertexAttribArray(3);
-	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
+	glEnableVertexAttribArray(4);
+	glVertexAttribPointer(4, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (const void*)(2 * sizeof(float)));
 	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+void OpenGLRenderer::rotate(float radiant)
+{
+	rotation = radiant;
 }
 
 

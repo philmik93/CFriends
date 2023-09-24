@@ -37,6 +37,7 @@ public:
 	virtual void fillRect(float x, float y, float s) = 0;
 	virtual void drawRect(float x, float y, float w, float h) = 0;
 	virtual void drawRect(float x, float y, float s) = 0;
+	virtual void rotate(float radiant) = 0;
 	virtual CTexture* loadTexture(std::string) = 0;
 	virtual void texture(CTexture* texture, double x, double y, double w, double h) = 0;
 
