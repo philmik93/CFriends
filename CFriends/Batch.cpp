@@ -55,7 +55,6 @@ void Batch::render()
 
 	glBufferSubData(GL_ARRAY_BUFFER, 0, currentTriangleCount*3*VERTEX_SIZE, vertices);
 	glDrawArrays(GL_TRIANGLES, 0, currentTriangleCount*3);
-
 	currentTriangleCount = 0;
 }
 

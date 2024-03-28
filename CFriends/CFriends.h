@@ -38,6 +38,7 @@ void drawRect(float x, float y, float w, float h);
 void drawRect(float x, float y, float s);
 void rotate(float radiant);
 float radians(float degree);
+float getFPS();
 CTexture* loadTexture(std::string path);
 void texture(CTexture* texture, double x, double y, double w, double h);
 float getWidth();

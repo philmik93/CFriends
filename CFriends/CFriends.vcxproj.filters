@@ -88,6 +88,9 @@
     <Filter Include="Headerdateien\Vendor">
       <UniqueIdentifier>{caacd28e-b397-48a9-951d-51eb97e0ebe7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Vendor\ImGui">
+      <UniqueIdentifier>{b0e5b58f-b29a-43a1-bb79-c76ceb333395}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -198,6 +201,33 @@
     <ClInclude Include="Shader.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_glfw.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3_loader.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -292,6 +322,27 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_glfw.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_opengl3.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_tables.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Headerdateien\Vendor\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

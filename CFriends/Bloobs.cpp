@@ -14,6 +14,7 @@ void Bloobs::setup()
 
 void Bloobs::process(double dt)
 {
+	dt *= 144;	//had to be added because the interpretation of dt changed
 	background(100);
 	population->run(dt);
 	

@@ -45,6 +45,7 @@ public:
 	virtual void prepareFrame() = 0;
 	virtual void refreshFramebuffer(int width, int height) = 0;
 	virtual void init() = 0;
+	virtual void resizeWindow(int width, int height) = 0;
 
 
 	int getWindowWidth();

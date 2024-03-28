@@ -7,13 +7,13 @@ class Perceptron
 {
 public:
     double weights[inputCount+1];
-    double learningRate = 0.0007;
+    double learningRate = 0.004;
 
 public:
 
     inline Perceptron<inputCount>()
     {
-        for (int i = 0; i < inputCount; i++)
+        for (int i = 0; i < inputCount+1; i++)
         {
             weights[i] = randf(-1, 1);
         }

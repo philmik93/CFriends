@@ -6,7 +6,7 @@
 class Flocking : public App
 {
 public:
-	static const int VEHICLE_COUNT = 400;
+	static const int VEHICLE_COUNT = 100;
 	Vehicle vehicles[VEHICLE_COUNT];
 
 public:
@@ -23,6 +23,7 @@ public:
 
 	inline void process(double dt) override
 	{
+		dt *= 144;	//had to be added because the interpretation of dt changed
 		background(130);
 
 		for (int i = 0; i < VEHICLE_COUNT; i++)

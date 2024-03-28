@@ -26,7 +26,7 @@ public:
 	float translationX;
 	float translationY;
 private:
-	static const int resolution = 40;
+	static const int resolution = 25;
 	std::vector<Batch*> batches;
 	float lineWidth;
 
@@ -64,7 +64,7 @@ public:
 	void prepareFrame();
 	void refreshFramebuffer(int width, int height);
 	void init();
-
+	void resizeWindow(int width, int height);
 
 	static void GLAPIENTRY errorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam);
 		

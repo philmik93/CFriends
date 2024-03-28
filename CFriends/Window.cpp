@@ -16,5 +16,3 @@ Window::Window(int width, int height, const char* title, Renderer* r, App* app) 
 	r->setWindow(this);
 	app->setWindow(this);
 }
-
-

@@ -31,6 +31,8 @@ public:
 	virtual void setSize(int width, int height) = 0;
 	virtual void setTitle(const char* title) = 0;
 	virtual void enableTransparency(bool b) = 0;
+	virtual float getFPS() = 0;
+
 	
 };
 

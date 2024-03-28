@@ -29,6 +29,7 @@ void ParticleSystem::setup()
 
 void ParticleSystem::process(double dt)
 {
+	dt *= 144;		//had to be added because the interpretation of dt changed
 	background(100, 255);
 
 	setColor(0, 0, 0);

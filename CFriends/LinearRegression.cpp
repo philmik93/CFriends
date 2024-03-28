@@ -40,7 +40,6 @@ void LinearRegression::process(double dt)
 
 	setColor(0);
 	line(0, map(perceptron.getGuessY(-1), -1, 1, 0, getHeight()), getWidth(), map(perceptron.getGuessY(1), -1, 1, 0, getHeight()));
-
 	for (int i = 0; i < POINT_COUNT; i++)
 	{
 		setColor(0);

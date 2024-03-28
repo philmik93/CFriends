@@ -13,11 +13,13 @@ float b;
 vec4 colorTrans;
 
 uniform vec4 u_color;
+uniform float width = 800.0;
+uniform float height = 600.0;
 
 void main() {
 
-	a = position[0] / 600.0 * 2.0 - 1.0;
-	b = position.y / 400.0 * -2.0 + 1.0;
+	a = position[0] / width * 2.0 - 1.0;
+	b = position.y / height * -2.0 + 1.0;
 
 
 

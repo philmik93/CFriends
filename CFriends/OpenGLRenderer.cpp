@@ -59,14 +59,17 @@ void OpenGLRenderer::fillCircle(float x, float y, float r1, float r2)
 	}
 	
 	
-	glBindVertexArray(vaID);
-	glBindBuffer(GL_ARRAY_BUFFER, vbID);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	for (int i = 0; i < resolution; i++)
+	{
+		fillTri(vertices[0], vertices[1], vertices[i*2+2], vertices[i*2+3], vertices[i*2+4], vertices[i*2+5]);
+		
+	}
 
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
-	glDrawArrays(GL_TRIANGLE_FAN, 0, resolution+2);
+
+
+	
+
 
 	
 	
@@ -105,15 +108,12 @@ void OpenGLRenderer::drawCircle(float x, float y, float r1, float r2)
 	}
 
 	
-	glBindVertexArray(vaID);
-	glBindBuffer(GL_ARRAY_BUFFER, vbID);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	for (int i = 0; i < resolution; i++)
+	{
+		line(vertices[i * 2], vertices[i * 2 + 1], vertices[i * 2 + 2], vertices[i * 2 + 3]);
 
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float)*2, 0);
+	}
 	
-	glDrawArrays(GL_LINE_LOOP, 0, resolution+1);
-
 }
 
 void OpenGLRenderer::drawTri(float x1, float y1, float x2, float y2, float x3, float y3)
@@ -129,11 +129,9 @@ void OpenGLRenderer::drawTri(float x1, float y1, float x2, float y2, float x3, f
 	};
 
 
-	glBindVertexArray(vaID);
-	glBindBuffer(GL_ARRAY_BUFFER, vbID);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
-	glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+	line(x1, y1, x2, y2);
+	line(x2, y2, x3, y3);
+	line(x3, y3, x1, y1);
 
 	glDrawArrays(GL_LINE_LOOP, 0, 3);
 }
@@ -228,7 +226,7 @@ void OpenGLRenderer::line(float x1, float y1, float x2, float y2)
 	CVector<float>::sub(&a, &b, &vec);
 
 	float theta = std::acosf(CVector<float>::dot(&vec, &xAchse) / vec.getMag());
-	std::cout << "\n" << theta << "\n";
+	
 
 	
 	if (y2 < y1) theta = M_PI - theta;
@@ -242,8 +240,8 @@ void OpenGLRenderer::line(float x1, float y1, float x2, float y2)
 	CMatrix<float> vert1(2, 1);
 	vert1.set(-lineWidth / 2, 1, 1);
 	vert1.set(-lineWidth / 2, 2, 1);
-
 	CMatrix<float> vert2(2, 1);
+
 	vert2.set(-lineWidth / 2, 1, 1);
 	vert2.set(+lineWidth / 2, 2, 1);
 
@@ -469,7 +467,8 @@ void OpenGLRenderer::init()
 	glBindBuffer(GL_ARRAY_BUFFER, vbID);
 	glBufferData(GL_ARRAY_BUFFER,sizeof(float)*(resolution * 2 + 4), NULL, GL_DYNAMIC_DRAW);
 
-	
+	shader->setUniform1f("width", this->window->width);
+	shader->setUniform1f("height", this->window->height);
 }
 
 
@@ -497,6 +496,12 @@ void OpenGLRenderer::errorCallback(GLenum source, GLenum type, GLuint id, GLenum
 	std::cout << "Severity: " << severity << std::endl;
 	std::cout << "Message: " << message << std::endl;
 
+}
+
+void OpenGLRenderer::resizeWindow(int width, int height)
+{
+	shader->setUniform1f("width", width);
+	shader->setUniform1f("height", height);
 }
 
 

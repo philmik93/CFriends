@@ -144,6 +144,11 @@ float radians(float degree)
 	return degree / 360.0f * M_2_PI;
 }
 
+float getFPS()
+{
+	return mainWindow->getFPS();
+}
+
 
 
 CTexture* loadTexture(std::string path)

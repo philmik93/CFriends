@@ -16,7 +16,7 @@ void Field::update(double dt)
 void Field::display()
 {
 
-
+	setColor(255);
 	for (int i = 0; i < 10; i++)
 	{
 		if (i % 3 == 0) 
