@@ -350,7 +350,7 @@
     <None Include="res\shaders\Modern.shader" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\textures\neurons.jpg">
+    <Image Include="res\textures\lightning.jpg">
       <Filter>Ressourcendateien</Filter>
     </Image>
   </ItemGroup>
