@@ -45,10 +45,9 @@ class PhysicsEngine2D : public App
 
 
 
-/*
+
 
 int main()
 {
 	run(new PhysicsEngine2D());
 }
-*/

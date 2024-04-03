@@ -5,16 +5,14 @@ static Window* mainWindow = nullptr;
 
 
 
-
-
 void run(App* a)
 {
 	switch(currentGraphics)
 	{
 	case LEGACY_OPENGL:
-		mainWindow = new GLFWWindow(600, 400, "CFriends App", new OpenGLRenderer(), a);
 		break;
 	case MODERN_OPENGL:
+		mainWindow = new GLFWWindow(600, 400, "CFriends App", new OpenGLRenderer(), a);
 		break;
 	case VULCAN:
 		break;
@@ -22,6 +20,7 @@ void run(App* a)
 	
 	mainWindow->run();
 }
+
 
 void setSize(int width, int height)
 {

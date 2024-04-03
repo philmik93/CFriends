@@ -10,10 +10,10 @@ enum Graphics
 
 };
 
-Graphics const currentGraphics = LEGACY_OPENGL;
+Graphics const currentGraphics = MODERN_OPENGL;
+
 
 void run(App* a);
-
 void setSize(int width, int height);
 void setTitle(const char* title);
 void background(int grey);

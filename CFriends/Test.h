@@ -13,7 +13,7 @@ public:
 	inline void setup() override
 	{
 		//setSize(600,400);
-		tex = loadTexture("res/textures/neurons.jpg");
+		tex = loadTexture("res/textures/lightning.jpg");
 		
 	}
 
@@ -38,12 +38,12 @@ public:
 
 
 
-
+/*
 int main()
 {
 	run(new Test());
 }
-
+*/
 
 
 
